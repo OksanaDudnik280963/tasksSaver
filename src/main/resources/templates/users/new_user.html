@@ -85,7 +85,7 @@
                 </td>
                 <td>
                     <select name="Gender" th:field="${user.gender}">
-                        <option th:each="gender : ${T(com.tasks.calculator.dto.enums.Gender).values()}"
+                        <option th:each="gender : ${T(com.example.tasks.saver.dto.enums.Gender).values()}"
                                 th:value="${gender}"
                                 th:text="${gender.name}"/>
                     </select>
@@ -120,7 +120,7 @@
                     <div th:with="condition=${user.systems.size()!=0}">
                         <div th:each="system : ${user.systems}">
                             <select name="System" th:field="${system}">
-                                <option th:each="syst : ${T(com.tasks.calculator.dto.enums.SystemName).values()}"
+                                <option th:each="syst : ${T(com.example.tasks.saver.dto.enums.SystemName).values()}"
                                         th:value="${syst}"
                                         th:text="${syst.name}"/>
                             </select>
@@ -141,7 +141,7 @@
                     <label>
                         <div th:each="role : ${user.roles}">
                             <select name="Role" th:field="${user.roles}">
-                                <option th:each="rol : ${T(com.tasks.calculator.dto.enums.RoleName).values()}"
+                                <option th:each="rol : ${T(com.example.tasks.saver.dto.enums.RoleName).values()}"
                                         th:value="${rol}"
                                         th:text="${rol.name}"/>
                             </select>

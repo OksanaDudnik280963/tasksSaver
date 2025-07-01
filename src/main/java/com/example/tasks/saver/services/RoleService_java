@@ -1,7 +1,7 @@
-package com.tasks.calculator.services;
+package com.example.tasks.saver.services;
 
-import com.tasks.calculator.dto.Role;
-import com.tasks.calculator.repositories.RoleRepository;
+import com.example.tasks.saver.dto.Role;
+import com.example.tasks.saver.repositories.RoleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

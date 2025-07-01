@@ -73,7 +73,7 @@
                 </td>
                 <td>
                     <select name="TaskStatus" th:field="${task.taskStatus}">
-                        <option th:each="taskStatus : ${T(com.tasks.calculator.dto.enums.TasksStatus).values()}"
+                        <option th:each="taskStatus : ${T(com.example.tasks.saver.dto.enums.TasksStatus).values()}"
                                 th:value="${taskStatus}"
                                 th:text="${taskStatus.name}"/>
                     </select>

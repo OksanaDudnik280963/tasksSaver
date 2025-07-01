@@ -1246,3 +1246,967 @@ org.thymeleaf.exceptions.TemplateInputException: Error resolving fragment: "~{'f
 2025-07-01T17:59:45.310+01:00  WARN 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [jakarta.persistence.schema-generation.drop-source], use [javax.persistence.schema-generation.drop-source] instead
 2025-07-01T17:59:45.315+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
     drop table if exists OPERATIONS
+2025-07-01T17:59:46.830+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists TASKS
+2025-07-01T17:59:46.895+01:00  WARN 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [jakarta.persistence.schema-generation.create-source], use [javax.persistence.schema-generation.create-source] instead
+2025-07-01T17:59:46.903+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    create table OPERATIONS (
+        OPERATION_PRICE decimal(38,2) not null,
+        CREATED datetime(6) not null,
+        OPERATION_ID bigint not null auto_increment,
+        UPDATED datetime(6) not null,
+        CHANGED_BY varchar(255) not null,
+        CREATED_BY varchar(255) not null,
+        OPERATION_DESCRIPTION varchar(255),
+        OPERATION_NAME varchar(255) not null,
+        OPERATION_STATUS varchar(255),
+        TASK_NAME varchar(255) not null,
+        primary key (OPERATION_ID)
+    ) engine=InnoDB
+2025-07-01T17:59:48.427+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    create table TASKS (
+        TASK_COST decimal(38,2),
+        CREATED datetime(6) not null,
+        OPERATION_COUNT bigint,
+        TASK_ID bigint not null auto_increment,
+        UPDATED datetime(6) not null,
+        CHANGED_BY varchar(255) not null,
+        CREATED_BY varchar(255) not null,
+        TASK_DESCRIPTION varchar(255),
+        TASK_NAME varchar(255) not null,
+        TASK_STATUS varchar(255),
+        primary key (TASK_ID)
+    ) engine=InnoDB
+2025-07-01T17:59:48.806+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    alter table OPERATIONS 
+       add constraint UKs4xeik993uewbni5ha6yxt317 unique (OPERATION_NAME)
+2025-07-01T17:59:49.028+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    alter table OPERATIONS 
+       add constraint UK30s16rk9c6g5t90oa97wtyias unique (TASK_NAME)
+2025-07-01T17:59:49.303+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    alter table TASKS 
+       add constraint UK3hbka04yhx8fey0cqh5wqbaf unique (TASK_NAME)
+2025-07-01T17:59:50.674+01:00  WARN 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [jakarta.persistence.schema-generation.drop-source], use [javax.persistence.schema-generation.drop-source] instead
+2025-07-01T17:59:50.733+01:00 TRACE 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.type.spi.TypeConfiguration$Scope     : Handling #sessionFactoryCreated from [org.hibernate.internal.SessionFactoryImpl@3b2be83d] for TypeConfiguration
+2025-07-01T17:59:54.337+01:00  WARN 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-01T17:59:56.297+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 15 mappings in 'requestMappingHandlerMapping'
+2025-07-01T17:59:56.840+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-07-01T17:59:57.099+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-07-01T18:00:42.268+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [Thread-7] org.hibernate.SQL                        : 
+    drop table if exists OPERATIONS
+2025-07-01T18:00:43.663+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [Thread-7] org.hibernate.SQL                        : 
+    drop table if exists TASKS
+2025-07-01T18:00:44.726+01:00 TRACE 6672 --- [org.tasks.saver.TasksSaverApplication] [Thread-7] o.h.type.spi.TypeConfiguration$Scope     : Handling #sessionFactoryClosed from [org.hibernate.internal.SessionFactoryImpl@3b2be83d] for TypeConfiguration
+2025-07-01T18:00:44.729+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [Thread-7] o.h.type.spi.TypeConfiguration$Scope     : Un-scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration$Scope@3d872107] from SessionFactory [org.hibernate.internal.SessionFactoryImpl@3b2be83d]
+2025-07-01T18:05:26.806+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.s.w.f.ServerHttpObservationFilter      : Filter 'webMvcObservationFilter' configured for use
+2025-07-01T18:05:27.221+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration boolean -> org.hibernate.type.BasicTypeReference@75e30a41
+2025-07-01T18:05:27.223+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration boolean -> org.hibernate.type.BasicTypeReference@75e30a41
+2025-07-01T18:05:27.229+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Boolean -> org.hibernate.type.BasicTypeReference@75e30a41
+2025-07-01T18:05:27.230+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration numeric_boolean -> org.hibernate.type.BasicTypeReference@5cafaca6
+2025-07-01T18:05:27.232+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.NumericBooleanConverter -> org.hibernate.type.BasicTypeReference@5cafaca6
+2025-07-01T18:05:27.233+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration true_false -> org.hibernate.type.BasicTypeReference@39fe8217
+2025-07-01T18:05:27.238+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.TrueFalseConverter -> org.hibernate.type.BasicTypeReference@39fe8217
+2025-07-01T18:05:27.246+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration yes_no -> org.hibernate.type.BasicTypeReference@2f6e9c33
+2025-07-01T18:05:27.250+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.YesNoConverter -> org.hibernate.type.BasicTypeReference@2f6e9c33
+2025-07-01T18:05:27.252+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte -> org.hibernate.type.BasicTypeReference@2a740d73
+2025-07-01T18:05:27.255+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte -> org.hibernate.type.BasicTypeReference@2a740d73
+2025-07-01T18:05:27.256+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Byte -> org.hibernate.type.BasicTypeReference@2a740d73
+2025-07-01T18:05:27.257+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration binary -> org.hibernate.type.BasicTypeReference@b1f4e07
+2025-07-01T18:05:27.261+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte[] -> org.hibernate.type.BasicTypeReference@b1f4e07
+2025-07-01T18:05:27.262+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration [B -> org.hibernate.type.BasicTypeReference@b1f4e07
+2025-07-01T18:05:27.264+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration binary_wrapper -> org.hibernate.type.BasicTypeReference@463c9b49
+2025-07-01T18:05:27.266+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration wrapper-binary -> org.hibernate.type.BasicTypeReference@463c9b49
+2025-07-01T18:05:27.268+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration image -> org.hibernate.type.BasicTypeReference@66639a6c
+2025-07-01T18:05:27.269+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration blob -> org.hibernate.type.BasicTypeReference@44a7a33a
+2025-07-01T18:05:27.271+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Blob -> org.hibernate.type.BasicTypeReference@44a7a33a
+2025-07-01T18:05:27.272+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_blob -> org.hibernate.type.BasicTypeReference@19d7c6d7
+2025-07-01T18:05:27.273+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_blob_wrapper -> org.hibernate.type.BasicTypeReference@62de268e
+2025-07-01T18:05:27.281+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration short -> org.hibernate.type.BasicTypeReference@18147043
+2025-07-01T18:05:27.282+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration short -> org.hibernate.type.BasicTypeReference@18147043
+2025-07-01T18:05:27.283+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Short -> org.hibernate.type.BasicTypeReference@18147043
+2025-07-01T18:05:27.287+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration integer -> org.hibernate.type.BasicTypeReference@61d3ae08
+2025-07-01T18:05:27.288+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration int -> org.hibernate.type.BasicTypeReference@61d3ae08
+2025-07-01T18:05:27.289+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Integer -> org.hibernate.type.BasicTypeReference@61d3ae08
+2025-07-01T18:05:27.290+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration long -> org.hibernate.type.BasicTypeReference@46152d9b
+2025-07-01T18:05:27.291+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration long -> org.hibernate.type.BasicTypeReference@46152d9b
+2025-07-01T18:05:27.294+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Long -> org.hibernate.type.BasicTypeReference@46152d9b
+2025-07-01T18:05:27.295+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration float -> org.hibernate.type.BasicTypeReference@55ec8981
+2025-07-01T18:05:27.295+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration float -> org.hibernate.type.BasicTypeReference@55ec8981
+2025-07-01T18:05:27.297+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Float -> org.hibernate.type.BasicTypeReference@55ec8981
+2025-07-01T18:05:27.299+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration double -> org.hibernate.type.BasicTypeReference@6e416d17
+2025-07-01T18:05:27.299+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration double -> org.hibernate.type.BasicTypeReference@6e416d17
+2025-07-01T18:05:27.300+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Double -> org.hibernate.type.BasicTypeReference@6e416d17
+2025-07-01T18:05:27.302+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration big_integer -> org.hibernate.type.BasicTypeReference@129e3d39
+2025-07-01T18:05:27.302+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.math.BigInteger -> org.hibernate.type.BasicTypeReference@129e3d39
+2025-07-01T18:05:27.303+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration big_decimal -> org.hibernate.type.BasicTypeReference@7d88a304
+2025-07-01T18:05:27.304+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.math.BigDecimal -> org.hibernate.type.BasicTypeReference@7d88a304
+2025-07-01T18:05:27.305+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration character -> org.hibernate.type.BasicTypeReference@4c999db5
+2025-07-01T18:05:27.316+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration char -> org.hibernate.type.BasicTypeReference@4c999db5
+2025-07-01T18:05:27.319+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Character -> org.hibernate.type.BasicTypeReference@4c999db5
+2025-07-01T18:05:27.321+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration character_nchar -> org.hibernate.type.BasicTypeReference@295568e4
+2025-07-01T18:05:27.322+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration string -> org.hibernate.type.BasicTypeReference@4a41ff02
+2025-07-01T18:05:27.323+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.String -> org.hibernate.type.BasicTypeReference@4a41ff02
+2025-07-01T18:05:27.328+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration nstring -> org.hibernate.type.BasicTypeReference@7269f5cd
+2025-07-01T18:05:27.331+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration characters -> org.hibernate.type.BasicTypeReference@729dba00
+2025-07-01T18:05:27.333+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration char[] -> org.hibernate.type.BasicTypeReference@729dba00
+2025-07-01T18:05:27.334+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration [C -> org.hibernate.type.BasicTypeReference@729dba00
+2025-07-01T18:05:27.336+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration wrapper-characters -> org.hibernate.type.BasicTypeReference@708dfeff
+2025-07-01T18:05:27.337+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration text -> org.hibernate.type.BasicTypeReference@35f1b603
+2025-07-01T18:05:27.338+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration ntext -> org.hibernate.type.BasicTypeReference@80beaed
+2025-07-01T18:05:27.339+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration clob -> org.hibernate.type.BasicTypeReference@17591c56
+2025-07-01T18:05:27.343+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Clob -> org.hibernate.type.BasicTypeReference@17591c56
+2025-07-01T18:05:27.345+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration nclob -> org.hibernate.type.BasicTypeReference@8bc6244
+2025-07-01T18:05:27.346+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.NClob -> org.hibernate.type.BasicTypeReference@8bc6244
+2025-07-01T18:05:27.350+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_clob -> org.hibernate.type.BasicTypeReference@30459cfe
+2025-07-01T18:05:27.354+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_clob_char_array -> org.hibernate.type.BasicTypeReference@674e4499
+2025-07-01T18:05:27.355+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_clob_character_array -> org.hibernate.type.BasicTypeReference@382a5f8a
+2025-07-01T18:05:27.362+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_nclob -> org.hibernate.type.BasicTypeReference@53efa489
+2025-07-01T18:05:27.366+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_nclob_character_array -> org.hibernate.type.BasicTypeReference@4f517066
+2025-07-01T18:05:27.394+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_nclob_char_array -> org.hibernate.type.BasicTypeReference@5a2e8f99
+2025-07-01T18:05:27.395+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration Duration -> org.hibernate.type.BasicTypeReference@30124d59
+2025-07-01T18:05:27.412+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.Duration -> org.hibernate.type.BasicTypeReference@30124d59
+2025-07-01T18:05:27.413+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration LocalDateTime -> org.hibernate.type.BasicTypeReference@1e776c3e
+2025-07-01T18:05:27.419+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.LocalDateTime -> org.hibernate.type.BasicTypeReference@1e776c3e
+2025-07-01T18:05:27.421+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration LocalDate -> org.hibernate.type.BasicTypeReference@5ae1edd6
+2025-07-01T18:05:27.431+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.LocalDate -> org.hibernate.type.BasicTypeReference@5ae1edd6
+2025-07-01T18:05:27.432+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration LocalTime -> org.hibernate.type.BasicTypeReference@741de354
+2025-07-01T18:05:27.435+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.LocalTime -> org.hibernate.type.BasicTypeReference@741de354
+2025-07-01T18:05:27.436+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetDateTime -> org.hibernate.type.BasicTypeReference@56c7100b
+2025-07-01T18:05:27.440+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.OffsetDateTime -> org.hibernate.type.BasicTypeReference@56c7100b
+2025-07-01T18:05:27.449+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetDateTimeWithTimezone -> org.hibernate.type.BasicTypeReference@73f48071
+2025-07-01T18:05:27.452+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetDateTimeWithoutTimezone -> org.hibernate.type.BasicTypeReference@26ae4c84
+2025-07-01T18:05:27.463+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetTime -> org.hibernate.type.BasicTypeReference@3d320c46
+2025-07-01T18:05:27.466+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.OffsetTime -> org.hibernate.type.BasicTypeReference@3d320c46
+2025-07-01T18:05:27.488+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetTimeUtc -> org.hibernate.type.BasicTypeReference@539b14a3
+2025-07-01T18:05:27.550+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetTimeWithTimezone -> org.hibernate.type.BasicTypeReference@43be1a9
+2025-07-01T18:05:27.582+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetTimeWithoutTimezone -> org.hibernate.type.BasicTypeReference@50a547c6
+2025-07-01T18:05:27.584+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration ZonedDateTime -> org.hibernate.type.BasicTypeReference@7dd821a8
+2025-07-01T18:05:27.585+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.ZonedDateTime -> org.hibernate.type.BasicTypeReference@7dd821a8
+2025-07-01T18:05:27.588+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration ZonedDateTimeWithTimezone -> org.hibernate.type.BasicTypeReference@766d1cbc
+2025-07-01T18:05:27.591+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration ZonedDateTimeWithoutTimezone -> org.hibernate.type.BasicTypeReference@2d809d71
+2025-07-01T18:05:27.595+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration date -> org.hibernate.type.BasicTypeReference@57617470
+2025-07-01T18:05:27.604+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Date -> org.hibernate.type.BasicTypeReference@57617470
+2025-07-01T18:05:27.605+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration time -> org.hibernate.type.BasicTypeReference@6b08ca55
+2025-07-01T18:05:27.607+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Time -> org.hibernate.type.BasicTypeReference@6b08ca55
+2025-07-01T18:05:27.613+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration timestamp -> org.hibernate.type.BasicTypeReference@751ea374
+2025-07-01T18:05:27.616+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Timestamp -> org.hibernate.type.BasicTypeReference@751ea374
+2025-07-01T18:05:27.619+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Date -> org.hibernate.type.BasicTypeReference@751ea374
+2025-07-01T18:05:27.622+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration calendar -> org.hibernate.type.BasicTypeReference@5c5cd3b3
+2025-07-01T18:05:27.623+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Calendar -> org.hibernate.type.BasicTypeReference@5c5cd3b3
+2025-07-01T18:05:27.633+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.GregorianCalendar -> org.hibernate.type.BasicTypeReference@5c5cd3b3
+2025-07-01T18:05:27.636+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration calendar_date -> org.hibernate.type.BasicTypeReference@c2eebc
+2025-07-01T18:05:27.639+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration calendar_time -> org.hibernate.type.BasicTypeReference@2d35d693
+2025-07-01T18:05:27.650+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration instant -> org.hibernate.type.BasicTypeReference@2db0c542
+2025-07-01T18:05:27.652+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.Instant -> org.hibernate.type.BasicTypeReference@2db0c542
+2025-07-01T18:05:27.654+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration uuid -> org.hibernate.type.BasicTypeReference@17cb4a0c
+2025-07-01T18:05:27.665+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.UUID -> org.hibernate.type.BasicTypeReference@17cb4a0c
+2025-07-01T18:05:27.668+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration pg-uuid -> org.hibernate.type.BasicTypeReference@17cb4a0c
+2025-07-01T18:05:27.700+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration uuid-binary -> org.hibernate.type.BasicTypeReference@6be147
+2025-07-01T18:05:27.701+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration uuid-char -> org.hibernate.type.BasicTypeReference@3e93e97
+2025-07-01T18:05:27.721+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration class -> org.hibernate.type.BasicTypeReference@28d8617d
+2025-07-01T18:05:27.731+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Class -> org.hibernate.type.BasicTypeReference@28d8617d
+2025-07-01T18:05:27.738+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration currency -> org.hibernate.type.BasicTypeReference@658ed540
+2025-07-01T18:05:27.748+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration Currency -> org.hibernate.type.BasicTypeReference@658ed540
+2025-07-01T18:05:27.750+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Currency -> org.hibernate.type.BasicTypeReference@658ed540
+2025-07-01T18:05:27.799+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration locale -> org.hibernate.type.BasicTypeReference@3a30716f
+2025-07-01T18:05:27.818+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Locale -> org.hibernate.type.BasicTypeReference@3a30716f
+2025-07-01T18:05:27.834+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration serializable -> org.hibernate.type.BasicTypeReference@70e7ed38
+2025-07-01T18:05:27.835+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.io.Serializable -> org.hibernate.type.BasicTypeReference@70e7ed38
+2025-07-01T18:05:27.836+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration timezone -> org.hibernate.type.BasicTypeReference@1bdfa9d0
+2025-07-01T18:05:27.837+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.TimeZone -> org.hibernate.type.BasicTypeReference@1bdfa9d0
+2025-07-01T18:05:27.837+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration ZoneOffset -> org.hibernate.type.BasicTypeReference@8685b3e
+2025-07-01T18:05:27.838+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.ZoneOffset -> org.hibernate.type.BasicTypeReference@8685b3e
+2025-07-01T18:05:27.839+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration url -> org.hibernate.type.BasicTypeReference@316af855
+2025-07-01T18:05:27.839+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.net.URL -> org.hibernate.type.BasicTypeReference@316af855
+2025-07-01T18:05:27.840+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration vector -> org.hibernate.type.BasicTypeReference@7e2b5d6d
+2025-07-01T18:05:27.840+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration float_vector -> org.hibernate.type.BasicTypeReference@185cfa51
+2025-07-01T18:05:27.841+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration double_vector -> org.hibernate.type.BasicTypeReference@5227e3cf
+2025-07-01T18:05:27.841+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte_vector -> org.hibernate.type.BasicTypeReference@34e9018e
+2025-07-01T18:05:27.842+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration row_version -> org.hibernate.type.BasicTypeReference@108de24b
+2025-07-01T18:05:27.851+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration object -> org.hibernate.type.JavaObjectType@7a9dab1e
+2025-07-01T18:05:27.851+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Object -> org.hibernate.type.JavaObjectType@7a9dab1e
+2025-07-01T18:05:27.852+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration null -> org.hibernate.type.NullType@1e69e51e
+2025-07-01T18:05:27.853+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_date -> org.hibernate.type.BasicTypeReference@25c2daad
+2025-07-01T18:05:27.853+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_time -> org.hibernate.type.BasicTypeReference@16766886
+2025-07-01T18:05:27.854+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_timestamp -> org.hibernate.type.BasicTypeReference@2020a7a1
+2025-07-01T18:05:27.854+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_calendar -> org.hibernate.type.BasicTypeReference@1fd917f4
+2025-07-01T18:05:27.855+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_calendar_date -> org.hibernate.type.BasicTypeReference@2c7da110
+2025-07-01T18:05:27.856+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_calendar_time -> org.hibernate.type.BasicTypeReference@9eace41
+2025-07-01T18:05:27.856+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_binary -> org.hibernate.type.BasicTypeReference@2c526d72
+2025-07-01T18:05:27.857+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_serializable -> org.hibernate.type.BasicTypeReference@7b63b9bb
+2025-07-01T18:05:35.398+01:00  WARN 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-01T18:05:35.404+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(12, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@39073ab6) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@3c4f473e)
+2025-07-01T18:05:35.406+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(-9, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@62647113) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@38a85d0a)
+2025-07-01T18:05:35.423+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(-3, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@387a0223) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@7ecac4a5)
+2025-07-01T18:05:35.432+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(4003, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@3fe7de86) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@45dd947d)
+2025-07-01T18:05:35.472+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(4001, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@2d5eedff) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@519fb1d)
+2025-07-01T18:05:35.511+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(4002, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@40b06d6) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@2ddc0456)
+2025-07-01T18:05:35.522+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(2004, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@77b73507) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@3dbcf9ff)
+2025-07-01T18:05:36.502+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(2005, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@61dd7528) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@2c6e33f1)
+2025-07-01T18:05:36.556+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(2011, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@623f2476) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@38965acf)
+2025-07-01T18:05:37.061+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.jdbc.spi.JdbcTypeRegistry        : addDescriptor(NCharTypeDescriptor) replaced previous registration(CharTypeDescriptor)
+2025-07-01T18:05:37.063+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.jdbc.spi.JdbcTypeRegistry        : addDescriptor(NVarcharTypeDescriptor) replaced previous registration(VarcharTypeDescriptor)
+2025-07-01T18:05:37.075+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.jdbc.spi.JdbcTypeRegistry        : addDescriptor(LongNVarcharTypeDescriptor) replaced previous registration(LongVarcharTypeDescriptor)
+2025-07-01T18:05:37.081+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.jdbc.spi.JdbcTypeRegistry        : addDescriptor(NClobTypeDescriptor(DEFAULT)) replaced previous registration(ClobTypeDescriptor(DEFAULT))
+2025-07-01T18:05:37.099+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration null -> org.hibernate.type.NullType@32680cc0
+2025-07-01T18:05:37.132+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Type registration key [null] overrode previous entry : `org.hibernate.type.NullType@1e69e51e`
+2025-07-01T18:05:37.427+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.DurationType -> basicType@58(java.time.Duration,3015)
+2025-07-01T18:05:37.432+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration Duration -> basicType@58(java.time.Duration,3015)
+2025-07-01T18:05:37.432+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.Duration -> basicType@58(java.time.Duration,3015)
+2025-07-01T18:05:37.579+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.OffsetDateTimeType -> basicType@59(java.time.OffsetDateTime,3003)
+2025-07-01T18:05:37.684+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetDateTime -> basicType@59(java.time.OffsetDateTime,3003)
+2025-07-01T18:05:37.696+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.OffsetDateTime -> basicType@59(java.time.OffsetDateTime,3003)
+2025-07-01T18:05:37.724+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.ZonedDateTimeType -> basicType@60(java.time.ZonedDateTime,3003)
+2025-07-01T18:05:37.724+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration ZonedDateTime -> basicType@60(java.time.ZonedDateTime,3003)
+2025-07-01T18:05:37.725+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.ZonedDateTime -> basicType@60(java.time.ZonedDateTime,3003)
+2025-07-01T18:05:39.412+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.OffsetTimeType -> basicType@61(java.time.OffsetTime,3007)
+2025-07-01T18:05:39.413+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetTime -> basicType@61(java.time.OffsetTime,3007)
+2025-07-01T18:05:39.889+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.OffsetTime -> basicType@61(java.time.OffsetTime,3007)
+2025-07-01T18:05:39.894+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.type.spi.TypeConfiguration$Scope     : Scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration@6fc440c7] to MetadataBuildingContext [org.hibernate.boot.internal.MetadataBuildingContextRootImpl@7443c5dd]
+2025-07-01T18:05:58.595+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.type.spi.TypeConfiguration$Scope     : Scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration@6fc440c7] to SessionFactoryImplementor [org.hibernate.internal.SessionFactoryImpl@3e900a49]
+2025-07-01T18:05:58.598+01:00  WARN 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [jakarta.persistence.schema-generation.drop-source], use [javax.persistence.schema-generation.drop-source] instead
+2025-07-01T18:05:58.600+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists OPERATIONS
+2025-07-01T18:05:58.628+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists TASKS
+2025-07-01T18:05:58.638+01:00  WARN 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [jakarta.persistence.schema-generation.create-source], use [javax.persistence.schema-generation.create-source] instead
+2025-07-01T18:05:58.646+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    create table OPERATIONS (
+        OPERATION_PRICE decimal(38,2) not null,
+        CREATED datetime(6) not null,
+        OPERATION_ID bigint not null auto_increment,
+        UPDATED datetime(6) not null,
+        CHANGED_BY varchar(255) not null,
+        CREATED_BY varchar(255) not null,
+        OPERATION_DESCRIPTION varchar(255),
+        OPERATION_NAME varchar(255) not null,
+        OPERATION_STATUS varchar(255),
+        TASK_NAME varchar(255) not null,
+        primary key (OPERATION_ID)
+    ) engine=InnoDB
+2025-07-01T18:05:59.181+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    create table TASKS (
+        TASK_COST decimal(38,2),
+        CREATED datetime(6) not null,
+        OPERATION_COUNT bigint,
+        TASK_ID bigint not null auto_increment,
+        UPDATED datetime(6) not null,
+        CHANGED_BY varchar(255) not null,
+        CREATED_BY varchar(255) not null,
+        TASK_DESCRIPTION varchar(255),
+        TASK_NAME varchar(255) not null,
+        TASK_STATUS varchar(255),
+        primary key (TASK_ID)
+    ) engine=InnoDB
+2025-07-01T18:05:59.873+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    alter table OPERATIONS 
+       add constraint UKs4xeik993uewbni5ha6yxt317 unique (OPERATION_NAME)
+2025-07-01T18:06:00.223+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    alter table OPERATIONS 
+       add constraint UK30s16rk9c6g5t90oa97wtyias unique (TASK_NAME)
+2025-07-01T18:06:00.435+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    alter table TASKS 
+       add constraint UK3hbka04yhx8fey0cqh5wqbaf unique (TASK_NAME)
+2025-07-01T18:06:00.741+01:00  WARN 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [jakarta.persistence.schema-generation.drop-source], use [javax.persistence.schema-generation.drop-source] instead
+2025-07-01T18:06:00.744+01:00 TRACE 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.type.spi.TypeConfiguration$Scope     : Handling #sessionFactoryCreated from [org.hibernate.internal.SessionFactoryImpl@3e900a49] for TypeConfiguration
+2025-07-01T18:06:02.045+01:00  WARN 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-01T18:06:02.157+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 15 mappings in 'requestMappingHandlerMapping'
+2025-07-01T18:06:02.349+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-07-01T18:06:02.428+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-07-01T18:06:35.906+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.s.w.f.ServerHttpObservationFilter      : Filter 'webMvcObservationFilter' configured for use
+2025-07-01T18:06:38.592+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration boolean -> org.hibernate.type.BasicTypeReference@4ede72b9
+2025-07-01T18:06:38.603+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration boolean -> org.hibernate.type.BasicTypeReference@4ede72b9
+2025-07-01T18:06:38.604+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Boolean -> org.hibernate.type.BasicTypeReference@4ede72b9
+2025-07-01T18:06:38.605+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration numeric_boolean -> org.hibernate.type.BasicTypeReference@f7e44bc
+2025-07-01T18:06:38.606+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.NumericBooleanConverter -> org.hibernate.type.BasicTypeReference@f7e44bc
+2025-07-01T18:06:38.608+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration true_false -> org.hibernate.type.BasicTypeReference@3e9afdeb
+2025-07-01T18:06:38.609+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.TrueFalseConverter -> org.hibernate.type.BasicTypeReference@3e9afdeb
+2025-07-01T18:06:38.610+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration yes_no -> org.hibernate.type.BasicTypeReference@53162c78
+2025-07-01T18:06:38.615+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.YesNoConverter -> org.hibernate.type.BasicTypeReference@53162c78
+2025-07-01T18:06:38.616+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte -> org.hibernate.type.BasicTypeReference@5f4b7ed8
+2025-07-01T18:06:38.619+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte -> org.hibernate.type.BasicTypeReference@5f4b7ed8
+2025-07-01T18:06:38.622+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Byte -> org.hibernate.type.BasicTypeReference@5f4b7ed8
+2025-07-01T18:06:38.624+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration binary -> org.hibernate.type.BasicTypeReference@22ed9a29
+2025-07-01T18:06:38.626+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte[] -> org.hibernate.type.BasicTypeReference@22ed9a29
+2025-07-01T18:06:38.631+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration [B -> org.hibernate.type.BasicTypeReference@22ed9a29
+2025-07-01T18:06:38.643+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration binary_wrapper -> org.hibernate.type.BasicTypeReference@4bf14e3a
+2025-07-01T18:06:38.646+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration wrapper-binary -> org.hibernate.type.BasicTypeReference@4bf14e3a
+2025-07-01T18:06:38.650+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration image -> org.hibernate.type.BasicTypeReference@63ad23ca
+2025-07-01T18:06:38.652+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration blob -> org.hibernate.type.BasicTypeReference@22ec211b
+2025-07-01T18:06:38.654+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Blob -> org.hibernate.type.BasicTypeReference@22ec211b
+2025-07-01T18:06:38.655+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_blob -> org.hibernate.type.BasicTypeReference@3de36bc8
+2025-07-01T18:06:38.658+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_blob_wrapper -> org.hibernate.type.BasicTypeReference@6eabff76
+2025-07-01T18:06:38.662+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration short -> org.hibernate.type.BasicTypeReference@6492321a
+2025-07-01T18:06:38.664+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration short -> org.hibernate.type.BasicTypeReference@6492321a
+2025-07-01T18:06:38.666+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Short -> org.hibernate.type.BasicTypeReference@6492321a
+2025-07-01T18:06:38.672+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration integer -> org.hibernate.type.BasicTypeReference@2735336a
+2025-07-01T18:06:38.677+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration int -> org.hibernate.type.BasicTypeReference@2735336a
+2025-07-01T18:06:38.683+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Integer -> org.hibernate.type.BasicTypeReference@2735336a
+2025-07-01T18:06:38.686+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration long -> org.hibernate.type.BasicTypeReference@1aeb16f
+2025-07-01T18:06:38.688+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration long -> org.hibernate.type.BasicTypeReference@1aeb16f
+2025-07-01T18:06:38.690+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Long -> org.hibernate.type.BasicTypeReference@1aeb16f
+2025-07-01T18:06:38.694+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration float -> org.hibernate.type.BasicTypeReference@30cfbe63
+2025-07-01T18:06:38.696+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration float -> org.hibernate.type.BasicTypeReference@30cfbe63
+2025-07-01T18:06:38.705+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Float -> org.hibernate.type.BasicTypeReference@30cfbe63
+2025-07-01T18:06:38.721+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration double -> org.hibernate.type.BasicTypeReference@45b84882
+2025-07-01T18:06:38.730+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration double -> org.hibernate.type.BasicTypeReference@45b84882
+2025-07-01T18:06:38.734+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Double -> org.hibernate.type.BasicTypeReference@45b84882
+2025-07-01T18:06:38.736+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration big_integer -> org.hibernate.type.BasicTypeReference@4b189d3c
+2025-07-01T18:06:38.737+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.math.BigInteger -> org.hibernate.type.BasicTypeReference@4b189d3c
+2025-07-01T18:06:38.738+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration big_decimal -> org.hibernate.type.BasicTypeReference@3fc968f9
+2025-07-01T18:06:38.740+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.math.BigDecimal -> org.hibernate.type.BasicTypeReference@3fc968f9
+2025-07-01T18:06:38.742+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration character -> org.hibernate.type.BasicTypeReference@7238f5c5
+2025-07-01T18:06:38.800+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration char -> org.hibernate.type.BasicTypeReference@7238f5c5
+2025-07-01T18:06:38.981+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Character -> org.hibernate.type.BasicTypeReference@7238f5c5
+2025-07-01T18:06:39.019+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration character_nchar -> org.hibernate.type.BasicTypeReference@75c34f58
+2025-07-01T18:06:39.039+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration string -> org.hibernate.type.BasicTypeReference@7a3ddda1
+2025-07-01T18:06:39.059+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.String -> org.hibernate.type.BasicTypeReference@7a3ddda1
+2025-07-01T18:06:39.061+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration nstring -> org.hibernate.type.BasicTypeReference@ec7ecbf
+2025-07-01T18:06:39.088+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration characters -> org.hibernate.type.BasicTypeReference@3b64b67f
+2025-07-01T18:06:39.140+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration char[] -> org.hibernate.type.BasicTypeReference@3b64b67f
+2025-07-01T18:06:39.243+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration [C -> org.hibernate.type.BasicTypeReference@3b64b67f
+2025-07-01T18:06:39.260+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration wrapper-characters -> org.hibernate.type.BasicTypeReference@543297c4
+2025-07-01T18:06:39.260+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration text -> org.hibernate.type.BasicTypeReference@40f69836
+2025-07-01T18:06:39.261+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration ntext -> org.hibernate.type.BasicTypeReference@71e52683
+2025-07-01T18:06:39.268+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration clob -> org.hibernate.type.BasicTypeReference@6faca18e
+2025-07-01T18:06:39.273+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Clob -> org.hibernate.type.BasicTypeReference@6faca18e
+2025-07-01T18:06:39.274+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration nclob -> org.hibernate.type.BasicTypeReference@2fe09708
+2025-07-01T18:06:39.278+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.NClob -> org.hibernate.type.BasicTypeReference@2fe09708
+2025-07-01T18:06:39.286+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_clob -> org.hibernate.type.BasicTypeReference@5b239dea
+2025-07-01T18:06:39.290+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_clob_char_array -> org.hibernate.type.BasicTypeReference@32a7933
+2025-07-01T18:06:39.291+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_clob_character_array -> org.hibernate.type.BasicTypeReference@9801809
+2025-07-01T18:06:39.292+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_nclob -> org.hibernate.type.BasicTypeReference@227386e6
+2025-07-01T18:06:39.293+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_nclob_character_array -> org.hibernate.type.BasicTypeReference@65f8838f
+2025-07-01T18:06:39.295+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_nclob_char_array -> org.hibernate.type.BasicTypeReference@35cb8de2
+2025-07-01T18:06:39.304+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration Duration -> org.hibernate.type.BasicTypeReference@3c028b02
+2025-07-01T18:06:39.307+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.Duration -> org.hibernate.type.BasicTypeReference@3c028b02
+2025-07-01T18:06:39.308+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration LocalDateTime -> org.hibernate.type.BasicTypeReference@2f87ed2
+2025-07-01T18:06:39.309+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.LocalDateTime -> org.hibernate.type.BasicTypeReference@2f87ed2
+2025-07-01T18:06:39.310+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration LocalDate -> org.hibernate.type.BasicTypeReference@23bd71f9
+2025-07-01T18:06:39.311+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.LocalDate -> org.hibernate.type.BasicTypeReference@23bd71f9
+2025-07-01T18:06:39.312+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration LocalTime -> org.hibernate.type.BasicTypeReference@4af04cf1
+2025-07-01T18:06:39.317+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.LocalTime -> org.hibernate.type.BasicTypeReference@4af04cf1
+2025-07-01T18:06:39.320+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetDateTime -> org.hibernate.type.BasicTypeReference@62829436
+2025-07-01T18:06:39.321+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.OffsetDateTime -> org.hibernate.type.BasicTypeReference@62829436
+2025-07-01T18:06:39.323+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetDateTimeWithTimezone -> org.hibernate.type.BasicTypeReference@23cd685a
+2025-07-01T18:06:39.324+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetDateTimeWithoutTimezone -> org.hibernate.type.BasicTypeReference@6b37f763
+2025-07-01T18:06:39.325+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetTime -> org.hibernate.type.BasicTypeReference@23e8a930
+2025-07-01T18:06:39.325+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.OffsetTime -> org.hibernate.type.BasicTypeReference@23e8a930
+2025-07-01T18:06:39.326+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetTimeUtc -> org.hibernate.type.BasicTypeReference@553daa5f
+2025-07-01T18:06:39.327+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetTimeWithTimezone -> org.hibernate.type.BasicTypeReference@1d7a871a
+2025-07-01T18:06:39.328+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetTimeWithoutTimezone -> org.hibernate.type.BasicTypeReference@4922e739
+2025-07-01T18:06:39.329+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration ZonedDateTime -> org.hibernate.type.BasicTypeReference@2fe57604
+2025-07-01T18:06:39.339+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.ZonedDateTime -> org.hibernate.type.BasicTypeReference@2fe57604
+2025-07-01T18:06:39.342+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration ZonedDateTimeWithTimezone -> org.hibernate.type.BasicTypeReference@17b25ef5
+2025-07-01T18:06:39.359+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration ZonedDateTimeWithoutTimezone -> org.hibernate.type.BasicTypeReference@5e39594e
+2025-07-01T18:06:39.373+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration date -> org.hibernate.type.BasicTypeReference@fc669f
+2025-07-01T18:06:39.375+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Date -> org.hibernate.type.BasicTypeReference@fc669f
+2025-07-01T18:06:39.377+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration time -> org.hibernate.type.BasicTypeReference@42d75d2
+2025-07-01T18:06:39.389+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Time -> org.hibernate.type.BasicTypeReference@42d75d2
+2025-07-01T18:06:39.408+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration timestamp -> org.hibernate.type.BasicTypeReference@16dc654
+2025-07-01T18:06:39.409+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Timestamp -> org.hibernate.type.BasicTypeReference@16dc654
+2025-07-01T18:06:39.410+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Date -> org.hibernate.type.BasicTypeReference@16dc654
+2025-07-01T18:06:39.414+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration calendar -> org.hibernate.type.BasicTypeReference@150a1c1e
+2025-07-01T18:06:39.417+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Calendar -> org.hibernate.type.BasicTypeReference@150a1c1e
+2025-07-01T18:06:39.418+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.GregorianCalendar -> org.hibernate.type.BasicTypeReference@150a1c1e
+2025-07-01T18:06:39.420+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration calendar_date -> org.hibernate.type.BasicTypeReference@76a158be
+2025-07-01T18:06:39.421+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration calendar_time -> org.hibernate.type.BasicTypeReference@194d205d
+2025-07-01T18:06:39.422+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration instant -> org.hibernate.type.BasicTypeReference@767d0a46
+2025-07-01T18:06:39.423+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.Instant -> org.hibernate.type.BasicTypeReference@767d0a46
+2025-07-01T18:06:39.424+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration uuid -> org.hibernate.type.BasicTypeReference@3352127b
+2025-07-01T18:06:39.425+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.UUID -> org.hibernate.type.BasicTypeReference@3352127b
+2025-07-01T18:06:39.434+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration pg-uuid -> org.hibernate.type.BasicTypeReference@3352127b
+2025-07-01T18:06:39.435+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration uuid-binary -> org.hibernate.type.BasicTypeReference@4fcad807
+2025-07-01T18:06:39.436+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration uuid-char -> org.hibernate.type.BasicTypeReference@3f75466b
+2025-07-01T18:06:39.437+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration class -> org.hibernate.type.BasicTypeReference@214454f9
+2025-07-01T18:06:39.438+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Class -> org.hibernate.type.BasicTypeReference@214454f9
+2025-07-01T18:06:39.439+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration currency -> org.hibernate.type.BasicTypeReference@2265b60
+2025-07-01T18:06:39.440+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration Currency -> org.hibernate.type.BasicTypeReference@2265b60
+2025-07-01T18:06:39.440+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Currency -> org.hibernate.type.BasicTypeReference@2265b60
+2025-07-01T18:06:39.441+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration locale -> org.hibernate.type.BasicTypeReference@1bb5a1c3
+2025-07-01T18:06:39.445+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Locale -> org.hibernate.type.BasicTypeReference@1bb5a1c3
+2025-07-01T18:06:39.452+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration serializable -> org.hibernate.type.BasicTypeReference@e66fac0
+2025-07-01T18:06:39.454+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.io.Serializable -> org.hibernate.type.BasicTypeReference@e66fac0
+2025-07-01T18:06:39.457+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration timezone -> org.hibernate.type.BasicTypeReference@d869469
+2025-07-01T18:06:39.459+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.TimeZone -> org.hibernate.type.BasicTypeReference@d869469
+2025-07-01T18:06:39.461+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration ZoneOffset -> org.hibernate.type.BasicTypeReference@3dcb23e2
+2025-07-01T18:06:39.469+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.ZoneOffset -> org.hibernate.type.BasicTypeReference@3dcb23e2
+2025-07-01T18:06:39.483+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration url -> org.hibernate.type.BasicTypeReference@bc62621
+2025-07-01T18:06:39.488+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.net.URL -> org.hibernate.type.BasicTypeReference@bc62621
+2025-07-01T18:06:39.490+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration vector -> org.hibernate.type.BasicTypeReference@32cf7d63
+2025-07-01T18:06:39.496+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration float_vector -> org.hibernate.type.BasicTypeReference@b53828f
+2025-07-01T18:06:39.502+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration double_vector -> org.hibernate.type.BasicTypeReference@6fe37434
+2025-07-01T18:06:39.505+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte_vector -> org.hibernate.type.BasicTypeReference@55aeb0c7
+2025-07-01T18:06:39.508+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration row_version -> org.hibernate.type.BasicTypeReference@1cc3fb74
+2025-07-01T18:06:39.661+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration object -> org.hibernate.type.JavaObjectType@2e373052
+2025-07-01T18:06:39.676+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Object -> org.hibernate.type.JavaObjectType@2e373052
+2025-07-01T18:06:39.827+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration null -> org.hibernate.type.NullType@7780c820
+2025-07-01T18:06:39.828+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_date -> org.hibernate.type.BasicTypeReference@5a3084fb
+2025-07-01T18:06:39.842+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_time -> org.hibernate.type.BasicTypeReference@1ab2868b
+2025-07-01T18:06:39.843+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_timestamp -> org.hibernate.type.BasicTypeReference@3318edfc
+2025-07-01T18:06:39.854+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_calendar -> org.hibernate.type.BasicTypeReference@4228e277
+2025-07-01T18:06:39.856+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_calendar_date -> org.hibernate.type.BasicTypeReference@1ce1b195
+2025-07-01T18:06:39.857+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_calendar_time -> org.hibernate.type.BasicTypeReference@1269ea5c
+2025-07-01T18:06:39.858+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_binary -> org.hibernate.type.BasicTypeReference@66ea92e0
+2025-07-01T18:06:39.860+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_serializable -> org.hibernate.type.BasicTypeReference@6354ef10
+2025-07-01T18:06:59.418+01:00  WARN 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-01T18:06:59.597+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(12, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@628eb96d) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@34f6945b)
+2025-07-01T18:06:59.600+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(-9, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@20fa375a) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@6c1ba0a2)
+2025-07-01T18:06:59.604+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(-3, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@7bc9299d) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@7b9d3ef3)
+2025-07-01T18:06:59.605+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(4003, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@a2c963d) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@3b03296a)
+2025-07-01T18:06:59.605+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(4001, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@9b47a56) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@1b4ca735)
+2025-07-01T18:06:59.606+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(4002, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@753f471f) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@57d568ab)
+2025-07-01T18:06:59.607+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(2004, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@7d99cecd) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@392bb44)
+2025-07-01T18:06:59.608+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(2005, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@c9a0396) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@70f6a29e)
+2025-07-01T18:06:59.610+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(2011, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@43aaf5eb) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@55742e41)
+2025-07-01T18:06:59.628+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.jdbc.spi.JdbcTypeRegistry        : addDescriptor(NCharTypeDescriptor) replaced previous registration(CharTypeDescriptor)
+2025-07-01T18:06:59.630+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.jdbc.spi.JdbcTypeRegistry        : addDescriptor(NVarcharTypeDescriptor) replaced previous registration(VarcharTypeDescriptor)
+2025-07-01T18:06:59.636+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.jdbc.spi.JdbcTypeRegistry        : addDescriptor(LongNVarcharTypeDescriptor) replaced previous registration(LongVarcharTypeDescriptor)
+2025-07-01T18:07:00.062+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.jdbc.spi.JdbcTypeRegistry        : addDescriptor(NClobTypeDescriptor(DEFAULT)) replaced previous registration(ClobTypeDescriptor(DEFAULT))
+2025-07-01T18:07:00.098+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration null -> org.hibernate.type.NullType@70f1450
+2025-07-01T18:07:00.103+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Type registration key [null] overrode previous entry : `org.hibernate.type.NullType@7780c820`
+2025-07-01T18:07:00.135+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.DurationType -> basicType@1(java.time.Duration,3015)
+2025-07-01T18:07:00.136+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration Duration -> basicType@1(java.time.Duration,3015)
+2025-07-01T18:07:00.137+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.Duration -> basicType@1(java.time.Duration,3015)
+2025-07-01T18:07:00.700+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.OffsetDateTimeType -> basicType@2(java.time.OffsetDateTime,3003)
+2025-07-01T18:07:00.796+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetDateTime -> basicType@2(java.time.OffsetDateTime,3003)
+2025-07-01T18:07:00.797+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.OffsetDateTime -> basicType@2(java.time.OffsetDateTime,3003)
+2025-07-01T18:07:00.798+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.ZonedDateTimeType -> basicType@3(java.time.ZonedDateTime,3003)
+2025-07-01T18:07:00.799+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration ZonedDateTime -> basicType@3(java.time.ZonedDateTime,3003)
+2025-07-01T18:07:00.800+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.ZonedDateTime -> basicType@3(java.time.ZonedDateTime,3003)
+2025-07-01T18:07:00.818+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.OffsetTimeType -> basicType@4(java.time.OffsetTime,3007)
+2025-07-01T18:07:00.825+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetTime -> basicType@4(java.time.OffsetTime,3007)
+2025-07-01T18:07:00.826+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.OffsetTime -> basicType@4(java.time.OffsetTime,3007)
+2025-07-01T18:07:00.842+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.type.spi.TypeConfiguration$Scope     : Scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration@66637122] to MetadataBuildingContext [org.hibernate.boot.internal.MetadataBuildingContextRootImpl@5eaa696c]
+2025-07-01T18:07:12.714+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.type.spi.TypeConfiguration$Scope     : Scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration@66637122] to SessionFactoryImplementor [org.hibernate.internal.SessionFactoryImpl@63cf3573]
+2025-07-01T18:07:12.776+01:00  WARN 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [jakarta.persistence.schema-generation.drop-source], use [javax.persistence.schema-generation.drop-source] instead
+2025-07-01T18:07:12.862+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists OPERATIONS
+2025-07-01T18:07:13.013+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists TASKS
+2025-07-01T18:07:13.079+01:00  WARN 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [jakarta.persistence.schema-generation.create-source], use [javax.persistence.schema-generation.create-source] instead
+2025-07-01T18:07:13.139+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    create table OPERATIONS (
+        OPERATION_PRICE decimal(38,2) not null,
+        CREATED datetime(6) not null,
+        OPERATION_ID bigint not null auto_increment,
+        UPDATED datetime(6) not null,
+        CHANGED_BY varchar(255) not null,
+        CREATED_BY varchar(255) not null,
+        OPERATION_DESCRIPTION varchar(255),
+        OPERATION_NAME varchar(255) not null,
+        OPERATION_STATUS varchar(255),
+        TASK_NAME varchar(255) not null,
+        primary key (OPERATION_ID)
+    ) engine=InnoDB
+2025-07-01T18:07:13.261+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    create table TASKS (
+        TASK_COST decimal(38,2),
+        CREATED datetime(6) not null,
+        OPERATION_COUNT bigint,
+        TASK_ID bigint not null auto_increment,
+        UPDATED datetime(6) not null,
+        CHANGED_BY varchar(255) not null,
+        CREATED_BY varchar(255) not null,
+        TASK_DESCRIPTION varchar(255),
+        TASK_NAME varchar(255) not null,
+        TASK_STATUS varchar(255),
+        primary key (TASK_ID)
+    ) engine=InnoDB
+2025-07-01T18:07:13.418+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    alter table OPERATIONS 
+       add constraint UKs4xeik993uewbni5ha6yxt317 unique (OPERATION_NAME)
+2025-07-01T18:07:13.575+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    alter table OPERATIONS 
+       add constraint UK30s16rk9c6g5t90oa97wtyias unique (TASK_NAME)
+2025-07-01T18:07:13.763+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    alter table TASKS 
+       add constraint UK3hbka04yhx8fey0cqh5wqbaf unique (TASK_NAME)
+2025-07-01T18:07:14.327+01:00  WARN 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [jakarta.persistence.schema-generation.drop-source], use [javax.persistence.schema-generation.drop-source] instead
+2025-07-01T18:07:14.362+01:00 TRACE 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.type.spi.TypeConfiguration$Scope     : Handling #sessionFactoryCreated from [org.hibernate.internal.SessionFactoryImpl@63cf3573] for TypeConfiguration
+2025-07-01T18:07:17.756+01:00  WARN 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-01T18:07:18.392+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 15 mappings in 'requestMappingHandlerMapping'
+2025-07-01T18:07:18.758+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-07-01T18:07:19.896+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-07-01T18:07:31.107+01:00  WARN 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2025-07-01T18:07:31.742+01:00  WARN 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-07-01T18:07:34.086+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists OPERATIONS
+2025-07-01T18:07:34.179+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists TASKS
+2025-07-01T18:07:34.484+01:00 TRACE 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.type.spi.TypeConfiguration$Scope     : Handling #sessionFactoryClosed from [org.hibernate.internal.SessionFactoryImpl@63cf3573] for TypeConfiguration
+2025-07-01T18:07:34.485+01:00 DEBUG 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.type.spi.TypeConfiguration$Scope     : Un-scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration$Scope@6430d2fe] from SessionFactory [org.hibernate.internal.SessionFactoryImpl@63cf3573]
+2025-07-01T18:07:34.935+01:00 ERROR 3144 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2025-07-01T18:43:30.280+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.s.w.f.ServerHttpObservationFilter      : Filter 'webMvcObservationFilter' configured for use
+2025-07-01T18:43:34.057+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration boolean -> org.hibernate.type.BasicTypeReference@6609473f
+2025-07-01T18:43:34.066+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration boolean -> org.hibernate.type.BasicTypeReference@6609473f
+2025-07-01T18:43:34.070+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Boolean -> org.hibernate.type.BasicTypeReference@6609473f
+2025-07-01T18:43:34.072+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration numeric_boolean -> org.hibernate.type.BasicTypeReference@381bec9d
+2025-07-01T18:43:34.074+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.NumericBooleanConverter -> org.hibernate.type.BasicTypeReference@381bec9d
+2025-07-01T18:43:34.075+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration true_false -> org.hibernate.type.BasicTypeReference@18de72e2
+2025-07-01T18:43:34.077+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.TrueFalseConverter -> org.hibernate.type.BasicTypeReference@18de72e2
+2025-07-01T18:43:34.078+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration yes_no -> org.hibernate.type.BasicTypeReference@20b9e03b
+2025-07-01T18:43:34.078+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.YesNoConverter -> org.hibernate.type.BasicTypeReference@20b9e03b
+2025-07-01T18:43:34.080+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte -> org.hibernate.type.BasicTypeReference@17945ea1
+2025-07-01T18:43:34.081+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte -> org.hibernate.type.BasicTypeReference@17945ea1
+2025-07-01T18:43:34.082+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Byte -> org.hibernate.type.BasicTypeReference@17945ea1
+2025-07-01T18:43:34.087+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration binary -> org.hibernate.type.BasicTypeReference@708c37ca
+2025-07-01T18:43:34.089+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte[] -> org.hibernate.type.BasicTypeReference@708c37ca
+2025-07-01T18:43:34.091+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration [B -> org.hibernate.type.BasicTypeReference@708c37ca
+2025-07-01T18:43:34.093+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration binary_wrapper -> org.hibernate.type.BasicTypeReference@1b2e025b
+2025-07-01T18:43:34.095+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration wrapper-binary -> org.hibernate.type.BasicTypeReference@1b2e025b
+2025-07-01T18:43:34.096+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration image -> org.hibernate.type.BasicTypeReference@500ee5cd
+2025-07-01T18:43:34.097+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration blob -> org.hibernate.type.BasicTypeReference@3b59194d
+2025-07-01T18:43:34.099+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Blob -> org.hibernate.type.BasicTypeReference@3b59194d
+2025-07-01T18:43:34.100+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_blob -> org.hibernate.type.BasicTypeReference@3119772
+2025-07-01T18:43:34.102+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_blob_wrapper -> org.hibernate.type.BasicTypeReference@2f52e855
+2025-07-01T18:43:34.104+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration short -> org.hibernate.type.BasicTypeReference@8d540ff
+2025-07-01T18:43:34.105+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration short -> org.hibernate.type.BasicTypeReference@8d540ff
+2025-07-01T18:43:34.106+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Short -> org.hibernate.type.BasicTypeReference@8d540ff
+2025-07-01T18:43:34.107+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration integer -> org.hibernate.type.BasicTypeReference@7b35b3d9
+2025-07-01T18:43:34.108+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration int -> org.hibernate.type.BasicTypeReference@7b35b3d9
+2025-07-01T18:43:34.109+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Integer -> org.hibernate.type.BasicTypeReference@7b35b3d9
+2025-07-01T18:43:34.110+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration long -> org.hibernate.type.BasicTypeReference@741001ca
+2025-07-01T18:43:34.111+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration long -> org.hibernate.type.BasicTypeReference@741001ca
+2025-07-01T18:43:34.112+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Long -> org.hibernate.type.BasicTypeReference@741001ca
+2025-07-01T18:43:34.117+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration float -> org.hibernate.type.BasicTypeReference@4cb85f5d
+2025-07-01T18:43:34.121+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration float -> org.hibernate.type.BasicTypeReference@4cb85f5d
+2025-07-01T18:43:34.122+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Float -> org.hibernate.type.BasicTypeReference@4cb85f5d
+2025-07-01T18:43:34.123+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration double -> org.hibernate.type.BasicTypeReference@6e482c8d
+2025-07-01T18:43:34.124+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration double -> org.hibernate.type.BasicTypeReference@6e482c8d
+2025-07-01T18:43:34.126+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Double -> org.hibernate.type.BasicTypeReference@6e482c8d
+2025-07-01T18:43:34.127+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration big_integer -> org.hibernate.type.BasicTypeReference@38b5e1e6
+2025-07-01T18:43:34.129+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.math.BigInteger -> org.hibernate.type.BasicTypeReference@38b5e1e6
+2025-07-01T18:43:34.130+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration big_decimal -> org.hibernate.type.BasicTypeReference@4c5fb96b
+2025-07-01T18:43:34.132+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.math.BigDecimal -> org.hibernate.type.BasicTypeReference@4c5fb96b
+2025-07-01T18:43:34.134+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration character -> org.hibernate.type.BasicTypeReference@4213450a
+2025-07-01T18:43:34.139+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration char -> org.hibernate.type.BasicTypeReference@4213450a
+2025-07-01T18:43:34.140+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Character -> org.hibernate.type.BasicTypeReference@4213450a
+2025-07-01T18:43:34.142+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration character_nchar -> org.hibernate.type.BasicTypeReference@6d902581
+2025-07-01T18:43:34.144+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration string -> org.hibernate.type.BasicTypeReference@7a3d5304
+2025-07-01T18:43:34.145+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.String -> org.hibernate.type.BasicTypeReference@7a3d5304
+2025-07-01T18:43:34.150+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration nstring -> org.hibernate.type.BasicTypeReference@4b1839c9
+2025-07-01T18:43:34.154+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration characters -> org.hibernate.type.BasicTypeReference@13fb1eb5
+2025-07-01T18:43:34.155+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration char[] -> org.hibernate.type.BasicTypeReference@13fb1eb5
+2025-07-01T18:43:34.157+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration [C -> org.hibernate.type.BasicTypeReference@13fb1eb5
+2025-07-01T18:43:34.159+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration wrapper-characters -> org.hibernate.type.BasicTypeReference@7f2b9d66
+2025-07-01T18:43:34.160+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration text -> org.hibernate.type.BasicTypeReference@6f9e54f4
+2025-07-01T18:43:34.248+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration ntext -> org.hibernate.type.BasicTypeReference@65c2eebf
+2025-07-01T18:43:34.252+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration clob -> org.hibernate.type.BasicTypeReference@2e875a04
+2025-07-01T18:43:34.264+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Clob -> org.hibernate.type.BasicTypeReference@2e875a04
+2025-07-01T18:43:34.901+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration nclob -> org.hibernate.type.BasicTypeReference@de4321f
+2025-07-01T18:43:34.939+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.NClob -> org.hibernate.type.BasicTypeReference@de4321f
+2025-07-01T18:43:34.943+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_clob -> org.hibernate.type.BasicTypeReference@10c0eea3
+2025-07-01T18:43:34.945+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_clob_char_array -> org.hibernate.type.BasicTypeReference@62055d12
+2025-07-01T18:43:34.947+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_clob_character_array -> org.hibernate.type.BasicTypeReference@76466c2c
+2025-07-01T18:43:34.949+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_nclob -> org.hibernate.type.BasicTypeReference@5a9ecc31
+2025-07-01T18:43:34.951+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_nclob_character_array -> org.hibernate.type.BasicTypeReference@4dbc8437
+2025-07-01T18:43:34.955+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_nclob_char_array -> org.hibernate.type.BasicTypeReference@599bd5f
+2025-07-01T18:43:34.957+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration Duration -> org.hibernate.type.BasicTypeReference@407b96cc
+2025-07-01T18:43:34.958+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.Duration -> org.hibernate.type.BasicTypeReference@407b96cc
+2025-07-01T18:43:34.959+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration LocalDateTime -> org.hibernate.type.BasicTypeReference@6c2835b6
+2025-07-01T18:43:34.962+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.LocalDateTime -> org.hibernate.type.BasicTypeReference@6c2835b6
+2025-07-01T18:43:34.964+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration LocalDate -> org.hibernate.type.BasicTypeReference@459c9938
+2025-07-01T18:43:34.965+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.LocalDate -> org.hibernate.type.BasicTypeReference@459c9938
+2025-07-01T18:43:34.967+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration LocalTime -> org.hibernate.type.BasicTypeReference@d27a791
+2025-07-01T18:43:34.968+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.LocalTime -> org.hibernate.type.BasicTypeReference@d27a791
+2025-07-01T18:43:34.969+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetDateTime -> org.hibernate.type.BasicTypeReference@11f68d0f
+2025-07-01T18:43:34.971+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.OffsetDateTime -> org.hibernate.type.BasicTypeReference@11f68d0f
+2025-07-01T18:43:35.013+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetDateTimeWithTimezone -> org.hibernate.type.BasicTypeReference@3c5e9f02
+2025-07-01T18:43:35.021+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetDateTimeWithoutTimezone -> org.hibernate.type.BasicTypeReference@1daa84e8
+2025-07-01T18:43:35.023+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetTime -> org.hibernate.type.BasicTypeReference@2d01b3e3
+2025-07-01T18:43:35.024+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.OffsetTime -> org.hibernate.type.BasicTypeReference@2d01b3e3
+2025-07-01T18:43:35.025+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetTimeUtc -> org.hibernate.type.BasicTypeReference@8bacdb9
+2025-07-01T18:43:35.026+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetTimeWithTimezone -> org.hibernate.type.BasicTypeReference@4054f523
+2025-07-01T18:43:35.026+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetTimeWithoutTimezone -> org.hibernate.type.BasicTypeReference@990a405
+2025-07-01T18:43:35.027+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration ZonedDateTime -> org.hibernate.type.BasicTypeReference@29ae807f
+2025-07-01T18:43:35.028+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.ZonedDateTime -> org.hibernate.type.BasicTypeReference@29ae807f
+2025-07-01T18:43:35.029+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration ZonedDateTimeWithTimezone -> org.hibernate.type.BasicTypeReference@772757f6
+2025-07-01T18:43:35.030+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration ZonedDateTimeWithoutTimezone -> org.hibernate.type.BasicTypeReference@10bd49dc
+2025-07-01T18:43:35.031+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration date -> org.hibernate.type.BasicTypeReference@1c017742
+2025-07-01T18:43:35.032+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Date -> org.hibernate.type.BasicTypeReference@1c017742
+2025-07-01T18:43:35.033+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration time -> org.hibernate.type.BasicTypeReference@41f1a1c5
+2025-07-01T18:43:35.034+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Time -> org.hibernate.type.BasicTypeReference@41f1a1c5
+2025-07-01T18:43:35.035+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration timestamp -> org.hibernate.type.BasicTypeReference@c24d6ea
+2025-07-01T18:43:35.042+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Timestamp -> org.hibernate.type.BasicTypeReference@c24d6ea
+2025-07-01T18:43:35.043+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Date -> org.hibernate.type.BasicTypeReference@c24d6ea
+2025-07-01T18:43:35.044+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration calendar -> org.hibernate.type.BasicTypeReference@762d8d1b
+2025-07-01T18:43:35.045+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Calendar -> org.hibernate.type.BasicTypeReference@762d8d1b
+2025-07-01T18:43:35.047+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.GregorianCalendar -> org.hibernate.type.BasicTypeReference@762d8d1b
+2025-07-01T18:43:35.052+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration calendar_date -> org.hibernate.type.BasicTypeReference@61814ffb
+2025-07-01T18:43:35.056+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration calendar_time -> org.hibernate.type.BasicTypeReference@2db22587
+2025-07-01T18:43:35.057+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration instant -> org.hibernate.type.BasicTypeReference@70b355d
+2025-07-01T18:43:35.058+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.Instant -> org.hibernate.type.BasicTypeReference@70b355d
+2025-07-01T18:43:35.060+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration uuid -> org.hibernate.type.BasicTypeReference@1dd425f2
+2025-07-01T18:43:35.070+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.UUID -> org.hibernate.type.BasicTypeReference@1dd425f2
+2025-07-01T18:43:35.073+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration pg-uuid -> org.hibernate.type.BasicTypeReference@1dd425f2
+2025-07-01T18:43:35.074+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration uuid-binary -> org.hibernate.type.BasicTypeReference@76c15f24
+2025-07-01T18:43:35.075+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration uuid-char -> org.hibernate.type.BasicTypeReference@4ae3d266
+2025-07-01T18:43:35.076+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration class -> org.hibernate.type.BasicTypeReference@141cb7ba
+2025-07-01T18:43:35.077+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Class -> org.hibernate.type.BasicTypeReference@141cb7ba
+2025-07-01T18:43:35.078+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration currency -> org.hibernate.type.BasicTypeReference@28dbeb7e
+2025-07-01T18:43:35.079+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration Currency -> org.hibernate.type.BasicTypeReference@28dbeb7e
+2025-07-01T18:43:35.080+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Currency -> org.hibernate.type.BasicTypeReference@28dbeb7e
+2025-07-01T18:43:35.083+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration locale -> org.hibernate.type.BasicTypeReference@549fb93e
+2025-07-01T18:43:35.090+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Locale -> org.hibernate.type.BasicTypeReference@549fb93e
+2025-07-01T18:43:35.091+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration serializable -> org.hibernate.type.BasicTypeReference@3b3129
+2025-07-01T18:43:35.093+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.io.Serializable -> org.hibernate.type.BasicTypeReference@3b3129
+2025-07-01T18:43:35.094+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration timezone -> org.hibernate.type.BasicTypeReference@71ebf7f3
+2025-07-01T18:43:35.095+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.TimeZone -> org.hibernate.type.BasicTypeReference@71ebf7f3
+2025-07-01T18:43:35.097+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration ZoneOffset -> org.hibernate.type.BasicTypeReference@61c62ab
+2025-07-01T18:43:35.098+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.ZoneOffset -> org.hibernate.type.BasicTypeReference@61c62ab
+2025-07-01T18:43:35.099+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration url -> org.hibernate.type.BasicTypeReference@2f637d1f
+2025-07-01T18:43:35.100+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.net.URL -> org.hibernate.type.BasicTypeReference@2f637d1f
+2025-07-01T18:43:35.101+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration vector -> org.hibernate.type.BasicTypeReference@7608b3a3
+2025-07-01T18:43:35.102+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration float_vector -> org.hibernate.type.BasicTypeReference@587296fe
+2025-07-01T18:43:35.104+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration double_vector -> org.hibernate.type.BasicTypeReference@3d9ebe61
+2025-07-01T18:43:35.105+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte_vector -> org.hibernate.type.BasicTypeReference@921b748
+2025-07-01T18:43:35.107+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration row_version -> org.hibernate.type.BasicTypeReference@3a078864
+2025-07-01T18:43:35.156+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration object -> org.hibernate.type.JavaObjectType@63ad23ca
+2025-07-01T18:43:35.159+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Object -> org.hibernate.type.JavaObjectType@63ad23ca
+2025-07-01T18:43:35.496+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration null -> org.hibernate.type.NullType@7238f5c5
+2025-07-01T18:43:35.519+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_date -> org.hibernate.type.BasicTypeReference@75c34f58
+2025-07-01T18:43:35.521+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_time -> org.hibernate.type.BasicTypeReference@7a3ddda1
+2025-07-01T18:43:35.551+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_timestamp -> org.hibernate.type.BasicTypeReference@ec7ecbf
+2025-07-01T18:43:35.556+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_calendar -> org.hibernate.type.BasicTypeReference@3b64b67f
+2025-07-01T18:43:35.558+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_calendar_date -> org.hibernate.type.BasicTypeReference@543297c4
+2025-07-01T18:43:35.559+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_calendar_time -> org.hibernate.type.BasicTypeReference@40f69836
+2025-07-01T18:43:35.560+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_binary -> org.hibernate.type.BasicTypeReference@71e52683
+2025-07-01T18:43:35.561+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_serializable -> org.hibernate.type.BasicTypeReference@6faca18e
+2025-07-01T18:43:40.460+01:00  WARN 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-01T18:43:41.027+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(12, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@56dc48e5) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@12302b7b)
+2025-07-01T18:43:41.029+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(-9, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@40c66096) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@6e16e812)
+2025-07-01T18:43:41.030+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(-3, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@5ab91e55) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@49418d8a)
+2025-07-01T18:43:41.031+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(4003, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@3a7086e4) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@63ffafc0)
+2025-07-01T18:43:41.032+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(4001, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@71264e5c) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@34ceb02f)
+2025-07-01T18:43:41.033+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(4002, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@a3747f4) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@14a868dd)
+2025-07-01T18:43:41.035+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(2004, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@57bf90ba) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@16311daa)
+2025-07-01T18:43:41.039+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(2005, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@2689e07f) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@71308af3)
+2025-07-01T18:43:41.040+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(2011, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@5aa1fe2f) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@4463749c)
+2025-07-01T18:43:41.051+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.jdbc.spi.JdbcTypeRegistry        : addDescriptor(NCharTypeDescriptor) replaced previous registration(CharTypeDescriptor)
+2025-07-01T18:43:41.052+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.jdbc.spi.JdbcTypeRegistry        : addDescriptor(NVarcharTypeDescriptor) replaced previous registration(VarcharTypeDescriptor)
+2025-07-01T18:43:41.057+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.jdbc.spi.JdbcTypeRegistry        : addDescriptor(LongNVarcharTypeDescriptor) replaced previous registration(LongVarcharTypeDescriptor)
+2025-07-01T18:43:41.091+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.jdbc.spi.JdbcTypeRegistry        : addDescriptor(NClobTypeDescriptor(DEFAULT)) replaced previous registration(ClobTypeDescriptor(DEFAULT))
+2025-07-01T18:43:41.125+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration null -> org.hibernate.type.NullType@1c0041d0
+2025-07-01T18:43:41.126+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Type registration key [null] overrode previous entry : `org.hibernate.type.NullType@7238f5c5`
+2025-07-01T18:43:41.153+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.DurationType -> basicType@1(java.time.Duration,3015)
+2025-07-01T18:43:41.154+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration Duration -> basicType@1(java.time.Duration,3015)
+2025-07-01T18:43:41.156+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.Duration -> basicType@1(java.time.Duration,3015)
+2025-07-01T18:43:41.179+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.OffsetDateTimeType -> basicType@2(java.time.OffsetDateTime,3003)
+2025-07-01T18:43:41.180+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetDateTime -> basicType@2(java.time.OffsetDateTime,3003)
+2025-07-01T18:43:41.181+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.OffsetDateTime -> basicType@2(java.time.OffsetDateTime,3003)
+2025-07-01T18:43:41.182+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.ZonedDateTimeType -> basicType@3(java.time.ZonedDateTime,3003)
+2025-07-01T18:43:41.182+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration ZonedDateTime -> basicType@3(java.time.ZonedDateTime,3003)
+2025-07-01T18:43:41.183+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.ZonedDateTime -> basicType@3(java.time.ZonedDateTime,3003)
+2025-07-01T18:43:41.189+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.OffsetTimeType -> basicType@4(java.time.OffsetTime,3007)
+2025-07-01T18:43:41.192+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetTime -> basicType@4(java.time.OffsetTime,3007)
+2025-07-01T18:43:41.195+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.OffsetTime -> basicType@4(java.time.OffsetTime,3007)
+2025-07-01T18:43:41.206+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.type.spi.TypeConfiguration$Scope     : Scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration@561883c0] to MetadataBuildingContext [org.hibernate.boot.internal.MetadataBuildingContextRootImpl@1fa1b460]
+2025-07-01T18:43:47.925+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.type.spi.TypeConfiguration$Scope     : Scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration@561883c0] to SessionFactoryImplementor [org.hibernate.internal.SessionFactoryImpl@e654ec7]
+2025-07-01T18:43:47.987+01:00  WARN 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [jakarta.persistence.schema-generation.drop-source], use [javax.persistence.schema-generation.drop-source] instead
+2025-07-01T18:43:48.046+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists OPERATIONS
+2025-07-01T18:43:48.310+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists TASKS
+2025-07-01T18:43:48.325+01:00  WARN 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [jakarta.persistence.schema-generation.create-source], use [javax.persistence.schema-generation.create-source] instead
+2025-07-01T18:43:48.566+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    create table OPERATIONS (
+        OPERATION_PRICE decimal(38,2) not null,
+        CREATED datetime(6) not null,
+        OPERATION_ID bigint not null auto_increment,
+        UPDATED datetime(6) not null,
+        CHANGED_BY varchar(255) not null,
+        CREATED_BY varchar(255) not null,
+        OPERATION_DESCRIPTION varchar(255),
+        OPERATION_NAME varchar(255) not null,
+        OPERATION_STATUS varchar(255),
+        TASK_NAME varchar(255) not null,
+        primary key (OPERATION_ID)
+    ) engine=InnoDB
+2025-07-01T18:43:49.096+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    create table TASKS (
+        TASK_COST decimal(38,2),
+        CREATED datetime(6) not null,
+        OPERATION_COUNT bigint,
+        TASK_ID bigint not null auto_increment,
+        UPDATED datetime(6) not null,
+        CHANGED_BY varchar(255) not null,
+        CREATED_BY varchar(255) not null,
+        TASK_DESCRIPTION varchar(255),
+        TASK_NAME varchar(255) not null,
+        TASK_STATUS varchar(255),
+        primary key (TASK_ID)
+    ) engine=InnoDB
+2025-07-01T18:43:49.240+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    alter table OPERATIONS 
+       add constraint UKs4xeik993uewbni5ha6yxt317 unique (OPERATION_NAME)
+2025-07-01T18:43:49.554+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    alter table OPERATIONS 
+       add constraint UK30s16rk9c6g5t90oa97wtyias unique (TASK_NAME)
+2025-07-01T18:43:49.696+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    alter table TASKS 
+       add constraint UK3hbka04yhx8fey0cqh5wqbaf unique (TASK_NAME)
+2025-07-01T18:43:49.815+01:00  WARN 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [jakarta.persistence.schema-generation.drop-source], use [javax.persistence.schema-generation.drop-source] instead
+2025-07-01T18:43:49.857+01:00 TRACE 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.type.spi.TypeConfiguration$Scope     : Handling #sessionFactoryCreated from [org.hibernate.internal.SessionFactoryImpl@e654ec7] for TypeConfiguration
+2025-07-01T18:43:51.800+01:00  WARN 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-01T18:43:52.303+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 15 mappings in 'requestMappingHandlerMapping'
+2025-07-01T18:43:52.591+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-07-01T18:43:52.963+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-07-01T18:43:56.312+01:00  WARN 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2025-07-01T18:43:56.717+01:00  WARN 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-07-01T18:43:56.731+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists OPERATIONS
+2025-07-01T18:43:56.840+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists TASKS
+2025-07-01T18:43:56.914+01:00 TRACE 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.type.spi.TypeConfiguration$Scope     : Handling #sessionFactoryClosed from [org.hibernate.internal.SessionFactoryImpl@e654ec7] for TypeConfiguration
+2025-07-01T18:43:56.914+01:00 DEBUG 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.type.spi.TypeConfiguration$Scope     : Un-scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration$Scope@2d0f9088] from SessionFactory [org.hibernate.internal.SessionFactoryImpl@e654ec7]
+2025-07-01T18:43:57.485+01:00 ERROR 6484 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2025-07-01T18:48:20.167+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [Thread-15] org.hibernate.SQL                        : 
+    drop table if exists OPERATIONS
+2025-07-01T18:48:21.408+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [Thread-15] org.hibernate.SQL                        : 
+    drop table if exists TASKS
+2025-07-01T18:48:21.552+01:00 TRACE 6672 --- [org.tasks.saver.TasksSaverApplication] [Thread-15] o.h.type.spi.TypeConfiguration$Scope     : Handling #sessionFactoryClosed from [org.hibernate.internal.SessionFactoryImpl@3e900a49] for TypeConfiguration
+2025-07-01T18:48:21.565+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [Thread-15] o.h.type.spi.TypeConfiguration$Scope     : Un-scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration$Scope@29796fb1] from SessionFactory [org.hibernate.internal.SessionFactoryImpl@3e900a49]
+2025-07-01T18:52:59.466+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.s.w.f.ServerHttpObservationFilter      : Filter 'webMvcObservationFilter' configured for use
+2025-07-01T18:53:11.407+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration boolean -> org.hibernate.type.BasicTypeReference@75e30a41
+2025-07-01T18:53:11.766+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration boolean -> org.hibernate.type.BasicTypeReference@75e30a41
+2025-07-01T18:53:11.797+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Boolean -> org.hibernate.type.BasicTypeReference@75e30a41
+2025-07-01T18:53:11.799+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration numeric_boolean -> org.hibernate.type.BasicTypeReference@5cafaca6
+2025-07-01T18:53:11.837+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.NumericBooleanConverter -> org.hibernate.type.BasicTypeReference@5cafaca6
+2025-07-01T18:53:11.839+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration true_false -> org.hibernate.type.BasicTypeReference@39fe8217
+2025-07-01T18:53:11.840+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.TrueFalseConverter -> org.hibernate.type.BasicTypeReference@39fe8217
+2025-07-01T18:53:11.842+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration yes_no -> org.hibernate.type.BasicTypeReference@2f6e9c33
+2025-07-01T18:53:11.843+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.YesNoConverter -> org.hibernate.type.BasicTypeReference@2f6e9c33
+2025-07-01T18:53:11.846+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte -> org.hibernate.type.BasicTypeReference@2a740d73
+2025-07-01T18:53:11.848+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte -> org.hibernate.type.BasicTypeReference@2a740d73
+2025-07-01T18:53:11.848+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Byte -> org.hibernate.type.BasicTypeReference@2a740d73
+2025-07-01T18:53:11.848+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration binary -> org.hibernate.type.BasicTypeReference@b1f4e07
+2025-07-01T18:53:11.848+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte[] -> org.hibernate.type.BasicTypeReference@b1f4e07
+2025-07-01T18:53:11.848+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration [B -> org.hibernate.type.BasicTypeReference@b1f4e07
+2025-07-01T18:53:11.848+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration binary_wrapper -> org.hibernate.type.BasicTypeReference@463c9b49
+2025-07-01T18:53:11.863+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration wrapper-binary -> org.hibernate.type.BasicTypeReference@463c9b49
+2025-07-01T18:53:11.863+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration image -> org.hibernate.type.BasicTypeReference@66639a6c
+2025-07-01T18:53:11.863+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration blob -> org.hibernate.type.BasicTypeReference@44a7a33a
+2025-07-01T18:53:11.863+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Blob -> org.hibernate.type.BasicTypeReference@44a7a33a
+2025-07-01T18:53:11.879+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_blob -> org.hibernate.type.BasicTypeReference@19d7c6d7
+2025-07-01T18:53:11.901+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_blob_wrapper -> org.hibernate.type.BasicTypeReference@62de268e
+2025-07-01T18:53:11.903+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration short -> org.hibernate.type.BasicTypeReference@18147043
+2025-07-01T18:53:11.903+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration short -> org.hibernate.type.BasicTypeReference@18147043
+2025-07-01T18:53:11.905+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Short -> org.hibernate.type.BasicTypeReference@18147043
+2025-07-01T18:53:11.905+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration integer -> org.hibernate.type.BasicTypeReference@61d3ae08
+2025-07-01T18:53:11.905+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration int -> org.hibernate.type.BasicTypeReference@61d3ae08
+2025-07-01T18:53:11.905+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Integer -> org.hibernate.type.BasicTypeReference@61d3ae08
+2025-07-01T18:53:11.905+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration long -> org.hibernate.type.BasicTypeReference@46152d9b
+2025-07-01T18:53:11.905+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration long -> org.hibernate.type.BasicTypeReference@46152d9b
+2025-07-01T18:53:11.921+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Long -> org.hibernate.type.BasicTypeReference@46152d9b
+2025-07-01T18:53:11.921+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration float -> org.hibernate.type.BasicTypeReference@55ec8981
+2025-07-01T18:53:11.921+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration float -> org.hibernate.type.BasicTypeReference@55ec8981
+2025-07-01T18:53:11.921+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Float -> org.hibernate.type.BasicTypeReference@55ec8981
+2025-07-01T18:53:12.044+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration double -> org.hibernate.type.BasicTypeReference@6e416d17
+2025-07-01T18:53:12.154+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration double -> org.hibernate.type.BasicTypeReference@6e416d17
+2025-07-01T18:53:12.247+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Double -> org.hibernate.type.BasicTypeReference@6e416d17
+2025-07-01T18:53:12.263+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration big_integer -> org.hibernate.type.BasicTypeReference@129e3d39
+2025-07-01T18:53:12.294+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.math.BigInteger -> org.hibernate.type.BasicTypeReference@129e3d39
+2025-07-01T18:53:12.326+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration big_decimal -> org.hibernate.type.BasicTypeReference@7d88a304
+2025-07-01T18:53:12.341+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.math.BigDecimal -> org.hibernate.type.BasicTypeReference@7d88a304
+2025-07-01T18:53:12.341+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration character -> org.hibernate.type.BasicTypeReference@4c999db5
+2025-07-01T18:53:12.341+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration char -> org.hibernate.type.BasicTypeReference@4c999db5
+2025-07-01T18:53:12.341+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Character -> org.hibernate.type.BasicTypeReference@4c999db5
+2025-07-01T18:53:12.372+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration character_nchar -> org.hibernate.type.BasicTypeReference@295568e4
+2025-07-01T18:53:12.404+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration string -> org.hibernate.type.BasicTypeReference@4a41ff02
+2025-07-01T18:53:12.466+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.String -> org.hibernate.type.BasicTypeReference@4a41ff02
+2025-07-01T18:53:12.466+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration nstring -> org.hibernate.type.BasicTypeReference@7269f5cd
+2025-07-01T18:53:12.482+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration characters -> org.hibernate.type.BasicTypeReference@729dba00
+2025-07-01T18:53:12.482+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration char[] -> org.hibernate.type.BasicTypeReference@729dba00
+2025-07-01T18:53:12.482+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration [C -> org.hibernate.type.BasicTypeReference@729dba00
+2025-07-01T18:53:12.482+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration wrapper-characters -> org.hibernate.type.BasicTypeReference@708dfeff
+2025-07-01T18:53:12.497+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration text -> org.hibernate.type.BasicTypeReference@35f1b603
+2025-07-01T18:53:12.497+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration ntext -> org.hibernate.type.BasicTypeReference@80beaed
+2025-07-01T18:53:12.513+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration clob -> org.hibernate.type.BasicTypeReference@17591c56
+2025-07-01T18:53:12.513+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Clob -> org.hibernate.type.BasicTypeReference@17591c56
+2025-07-01T18:53:12.513+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration nclob -> org.hibernate.type.BasicTypeReference@8bc6244
+2025-07-01T18:53:12.513+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.NClob -> org.hibernate.type.BasicTypeReference@8bc6244
+2025-07-01T18:53:12.513+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_clob -> org.hibernate.type.BasicTypeReference@30459cfe
+2025-07-01T18:53:12.529+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_clob_char_array -> org.hibernate.type.BasicTypeReference@674e4499
+2025-07-01T18:53:12.529+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_clob_character_array -> org.hibernate.type.BasicTypeReference@382a5f8a
+2025-07-01T18:53:12.529+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_nclob -> org.hibernate.type.BasicTypeReference@53efa489
+2025-07-01T18:53:12.529+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_nclob_character_array -> org.hibernate.type.BasicTypeReference@4f517066
+2025-07-01T18:53:12.560+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_nclob_char_array -> org.hibernate.type.BasicTypeReference@5a2e8f99
+2025-07-01T18:53:12.729+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration Duration -> org.hibernate.type.BasicTypeReference@30124d59
+2025-07-01T18:53:12.736+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.Duration -> org.hibernate.type.BasicTypeReference@30124d59
+2025-07-01T18:53:12.739+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration LocalDateTime -> org.hibernate.type.BasicTypeReference@1e776c3e
+2025-07-01T18:53:12.749+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.LocalDateTime -> org.hibernate.type.BasicTypeReference@1e776c3e
+2025-07-01T18:53:12.753+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration LocalDate -> org.hibernate.type.BasicTypeReference@5ae1edd6
+2025-07-01T18:53:12.755+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.LocalDate -> org.hibernate.type.BasicTypeReference@5ae1edd6
+2025-07-01T18:53:12.771+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration LocalTime -> org.hibernate.type.BasicTypeReference@741de354
+2025-07-01T18:53:12.774+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.LocalTime -> org.hibernate.type.BasicTypeReference@741de354
+2025-07-01T18:53:12.789+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetDateTime -> org.hibernate.type.BasicTypeReference@56c7100b
+2025-07-01T18:53:12.790+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.OffsetDateTime -> org.hibernate.type.BasicTypeReference@56c7100b
+2025-07-01T18:53:12.807+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetDateTimeWithTimezone -> org.hibernate.type.BasicTypeReference@73f48071
+2025-07-01T18:53:12.820+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetDateTimeWithoutTimezone -> org.hibernate.type.BasicTypeReference@26ae4c84
+2025-07-01T18:53:12.826+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetTime -> org.hibernate.type.BasicTypeReference@3d320c46
+2025-07-01T18:53:12.831+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.OffsetTime -> org.hibernate.type.BasicTypeReference@3d320c46
+2025-07-01T18:53:12.839+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetTimeUtc -> org.hibernate.type.BasicTypeReference@539b14a3
+2025-07-01T18:53:12.841+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetTimeWithTimezone -> org.hibernate.type.BasicTypeReference@43be1a9
+2025-07-01T18:53:12.841+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetTimeWithoutTimezone -> org.hibernate.type.BasicTypeReference@50a547c6
+2025-07-01T18:53:12.844+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration ZonedDateTime -> org.hibernate.type.BasicTypeReference@7dd821a8
+2025-07-01T18:53:12.849+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.ZonedDateTime -> org.hibernate.type.BasicTypeReference@7dd821a8
+2025-07-01T18:53:12.855+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration ZonedDateTimeWithTimezone -> org.hibernate.type.BasicTypeReference@766d1cbc
+2025-07-01T18:53:12.858+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration ZonedDateTimeWithoutTimezone -> org.hibernate.type.BasicTypeReference@2d809d71
+2025-07-01T18:53:12.864+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration date -> org.hibernate.type.BasicTypeReference@57617470
+2025-07-01T18:53:12.865+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Date -> org.hibernate.type.BasicTypeReference@57617470
+2025-07-01T18:53:12.867+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration time -> org.hibernate.type.BasicTypeReference@6b08ca55
+2025-07-01T18:53:12.881+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Time -> org.hibernate.type.BasicTypeReference@6b08ca55
+2025-07-01T18:53:12.882+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration timestamp -> org.hibernate.type.BasicTypeReference@751ea374
+2025-07-01T18:53:12.927+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Timestamp -> org.hibernate.type.BasicTypeReference@751ea374
+2025-07-01T18:53:12.934+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Date -> org.hibernate.type.BasicTypeReference@751ea374
+2025-07-01T18:53:12.955+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration calendar -> org.hibernate.type.BasicTypeReference@5c5cd3b3
+2025-07-01T18:53:12.969+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Calendar -> org.hibernate.type.BasicTypeReference@5c5cd3b3
+2025-07-01T18:53:12.974+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.GregorianCalendar -> org.hibernate.type.BasicTypeReference@5c5cd3b3
+2025-07-01T18:53:12.981+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration calendar_date -> org.hibernate.type.BasicTypeReference@c2eebc
+2025-07-01T18:53:12.983+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration calendar_time -> org.hibernate.type.BasicTypeReference@2d35d693
+2025-07-01T18:53:12.994+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration instant -> org.hibernate.type.BasicTypeReference@2db0c542
+2025-07-01T18:53:12.999+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.Instant -> org.hibernate.type.BasicTypeReference@2db0c542
+2025-07-01T18:53:13.003+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration uuid -> org.hibernate.type.BasicTypeReference@17cb4a0c
+2025-07-01T18:53:13.006+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.UUID -> org.hibernate.type.BasicTypeReference@17cb4a0c
+2025-07-01T18:53:13.030+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration pg-uuid -> org.hibernate.type.BasicTypeReference@17cb4a0c
+2025-07-01T18:53:13.032+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration uuid-binary -> org.hibernate.type.BasicTypeReference@6be147
+2025-07-01T18:53:13.039+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration uuid-char -> org.hibernate.type.BasicTypeReference@3e93e97
+2025-07-01T18:53:13.041+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration class -> org.hibernate.type.BasicTypeReference@28d8617d
+2025-07-01T18:53:13.049+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Class -> org.hibernate.type.BasicTypeReference@28d8617d
+2025-07-01T18:53:13.079+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration currency -> org.hibernate.type.BasicTypeReference@658ed540
+2025-07-01T18:53:13.346+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration Currency -> org.hibernate.type.BasicTypeReference@658ed540
+2025-07-01T18:53:13.595+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Currency -> org.hibernate.type.BasicTypeReference@658ed540
+2025-07-01T18:53:13.601+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration locale -> org.hibernate.type.BasicTypeReference@3a30716f
+2025-07-01T18:53:13.606+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Locale -> org.hibernate.type.BasicTypeReference@3a30716f
+2025-07-01T18:53:13.619+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration serializable -> org.hibernate.type.BasicTypeReference@70e7ed38
+2025-07-01T18:53:14.081+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.io.Serializable -> org.hibernate.type.BasicTypeReference@70e7ed38
+2025-07-01T18:53:14.155+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration timezone -> org.hibernate.type.BasicTypeReference@1bdfa9d0
+2025-07-01T18:53:14.171+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.TimeZone -> org.hibernate.type.BasicTypeReference@1bdfa9d0
+2025-07-01T18:53:14.214+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration ZoneOffset -> org.hibernate.type.BasicTypeReference@8685b3e
+2025-07-01T18:53:14.244+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.ZoneOffset -> org.hibernate.type.BasicTypeReference@8685b3e
+2025-07-01T18:53:14.257+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration url -> org.hibernate.type.BasicTypeReference@316af855
+2025-07-01T18:53:14.560+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.net.URL -> org.hibernate.type.BasicTypeReference@316af855
+2025-07-01T18:53:14.563+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration vector -> org.hibernate.type.BasicTypeReference@7e2b5d6d
+2025-07-01T18:53:14.567+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration float_vector -> org.hibernate.type.BasicTypeReference@185cfa51
+2025-07-01T18:53:14.627+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration double_vector -> org.hibernate.type.BasicTypeReference@5227e3cf
+2025-07-01T18:53:14.698+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte_vector -> org.hibernate.type.BasicTypeReference@34e9018e
+2025-07-01T18:53:14.743+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration row_version -> org.hibernate.type.BasicTypeReference@108de24b
+2025-07-01T18:53:14.773+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration object -> org.hibernate.type.JavaObjectType@7a9dab1e
+2025-07-01T18:53:14.805+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Object -> org.hibernate.type.JavaObjectType@7a9dab1e
+2025-07-01T18:53:14.819+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration null -> org.hibernate.type.NullType@1e69e51e
+2025-07-01T18:53:14.830+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_date -> org.hibernate.type.BasicTypeReference@6c0a464a
+2025-07-01T18:53:14.838+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_time -> org.hibernate.type.BasicTypeReference@5b78cc4e
+2025-07-01T18:53:14.852+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_timestamp -> org.hibernate.type.BasicTypeReference@2a2d8d63
+2025-07-01T18:53:14.866+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_calendar -> org.hibernate.type.BasicTypeReference@22fcac93
+2025-07-01T18:53:14.913+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_calendar_date -> org.hibernate.type.BasicTypeReference@1cfa8690
+2025-07-01T18:53:14.931+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_calendar_time -> org.hibernate.type.BasicTypeReference@1fd23fd
+2025-07-01T18:53:14.937+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_binary -> org.hibernate.type.BasicTypeReference@47fdf034
+2025-07-01T18:53:14.975+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_serializable -> org.hibernate.type.BasicTypeReference@a2546c
+2025-07-01T18:53:19.195+01:00  WARN 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-01T18:53:19.773+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(12, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@166b1067) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@110580e0)
+2025-07-01T18:53:19.804+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(-9, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@6dc84c69) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@506361f7)
+2025-07-01T18:53:19.960+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(-3, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@1ec5bbb4) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@23fa2a0c)
+2025-07-01T18:53:19.991+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(4003, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@cfe911e) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@475925af)
+2025-07-01T18:53:20.023+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(4001, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@74f23eeb) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@62ad033)
+2025-07-01T18:53:20.023+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(4002, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@7ea4c789) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@70def1af)
+2025-07-01T18:53:20.069+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(2004, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@153e8c39) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@45c56de5)
+2025-07-01T18:53:20.069+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(2005, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@1d85725b) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@1ad1bbcd)
+2025-07-01T18:53:20.097+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(2011, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@7b6fb3ea) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@15ab5327)
+2025-07-01T18:53:20.098+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.jdbc.spi.JdbcTypeRegistry        : addDescriptor(NCharTypeDescriptor) replaced previous registration(CharTypeDescriptor)
+2025-07-01T18:53:20.129+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.jdbc.spi.JdbcTypeRegistry        : addDescriptor(NVarcharTypeDescriptor) replaced previous registration(VarcharTypeDescriptor)
+2025-07-01T18:53:20.145+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.jdbc.spi.JdbcTypeRegistry        : addDescriptor(LongNVarcharTypeDescriptor) replaced previous registration(LongVarcharTypeDescriptor)
+2025-07-01T18:53:20.527+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.t.d.jdbc.spi.JdbcTypeRegistry        : addDescriptor(NClobTypeDescriptor(DEFAULT)) replaced previous registration(ClobTypeDescriptor(DEFAULT))
+2025-07-01T18:53:20.643+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration null -> org.hibernate.type.NullType@230aec63
+2025-07-01T18:53:20.658+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Type registration key [null] overrode previous entry : `org.hibernate.type.NullType@1e69e51e`
+2025-07-01T18:53:20.674+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.DurationType -> basicType@77(java.time.Duration,3015)
+2025-07-01T18:53:20.689+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration Duration -> basicType@77(java.time.Duration,3015)
+2025-07-01T18:53:20.689+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.Duration -> basicType@77(java.time.Duration,3015)
+2025-07-01T18:53:20.705+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.OffsetDateTimeType -> basicType@78(java.time.OffsetDateTime,3003)
+2025-07-01T18:53:20.721+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetDateTime -> basicType@78(java.time.OffsetDateTime,3003)
+2025-07-01T18:53:20.721+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.OffsetDateTime -> basicType@78(java.time.OffsetDateTime,3003)
+2025-07-01T18:53:20.721+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.ZonedDateTimeType -> basicType@79(java.time.ZonedDateTime,3003)
+2025-07-01T18:53:20.721+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration ZonedDateTime -> basicType@79(java.time.ZonedDateTime,3003)
+2025-07-01T18:53:20.721+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.ZonedDateTime -> basicType@79(java.time.ZonedDateTime,3003)
+2025-07-01T18:53:20.773+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration org.hibernate.type.OffsetTimeType -> basicType@80(java.time.OffsetTime,3007)
+2025-07-01T18:53:20.773+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetTime -> basicType@80(java.time.OffsetTime,3007)
+2025-07-01T18:53:20.773+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.OffsetTime -> basicType@80(java.time.OffsetTime,3007)
+2025-07-01T18:53:20.773+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.type.spi.TypeConfiguration$Scope     : Scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration@3412241c] to MetadataBuildingContext [org.hibernate.boot.internal.MetadataBuildingContextRootImpl@32e42197]
+2025-07-01T18:53:38.557+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.type.spi.TypeConfiguration$Scope     : Scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration@3412241c] to SessionFactoryImplementor [org.hibernate.internal.SessionFactoryImpl@a313146]
+2025-07-01T18:53:38.598+01:00  WARN 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [jakarta.persistence.schema-generation.drop-source], use [javax.persistence.schema-generation.drop-source] instead
+2025-07-01T18:53:38.622+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists OPERATIONS
+2025-07-01T18:53:39.137+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists TASKS
+2025-07-01T18:53:39.154+01:00  WARN 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [jakarta.persistence.schema-generation.create-source], use [javax.persistence.schema-generation.create-source] instead
+2025-07-01T18:53:39.162+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    create table OPERATIONS (
+        OPERATION_PRICE decimal(38,2) not null,
+        CREATED datetime(6) not null,
+        OPERATION_ID bigint not null auto_increment,
+        UPDATED datetime(6) not null,
+        CHANGED_BY varchar(255) not null,
+        CREATED_BY varchar(255) not null,
+        OPERATION_DESCRIPTION varchar(255),
+        OPERATION_NAME varchar(255) not null,
+        OPERATION_STATUS varchar(255),
+        TASK_NAME varchar(255) not null,
+        primary key (OPERATION_ID)
+    ) engine=InnoDB
+2025-07-01T18:53:42.400+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    create table TASKS (
+        TASK_COST decimal(38,2),
+        CREATED datetime(6) not null,
+        OPERATION_COUNT bigint,
+        TASK_ID bigint not null auto_increment,
+        UPDATED datetime(6) not null,
+        CHANGED_BY varchar(255) not null,
+        CREATED_BY varchar(255) not null,
+        TASK_DESCRIPTION varchar(255),
+        TASK_NAME varchar(255) not null,
+        TASK_STATUS varchar(255),
+        primary key (TASK_ID)
+    ) engine=InnoDB
+2025-07-01T18:53:44.203+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    alter table OPERATIONS 
+       add constraint UKs4xeik993uewbni5ha6yxt317 unique (OPERATION_NAME)
+2025-07-01T18:53:44.370+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    alter table OPERATIONS 
+       add constraint UK30s16rk9c6g5t90oa97wtyias unique (TASK_NAME)
+2025-07-01T18:53:44.564+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.SQL                        : 
+    alter table TASKS 
+       add constraint UK3hbka04yhx8fey0cqh5wqbaf unique (TASK_NAME)
+2025-07-01T18:53:45.418+01:00  WARN 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [jakarta.persistence.schema-generation.drop-source], use [javax.persistence.schema-generation.drop-source] instead
+2025-07-01T18:53:45.422+01:00 TRACE 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] o.h.type.spi.TypeConfiguration$Scope     : Handling #sessionFactoryCreated from [org.hibernate.internal.SessionFactoryImpl@a313146] for TypeConfiguration
+2025-07-01T18:53:57.716+01:00  WARN 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-01T18:54:04.069+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 15 mappings in 'requestMappingHandlerMapping'
+2025-07-01T18:54:23.277+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-07-01T18:54:32.795+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-07-01T18:55:11.596+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 1 mappings in 'requestMappingHandlerMapping'
+2025-07-01T18:55:12.602+01:00 DEBUG 6672 --- [org.tasks.saver.TasksSaverApplication] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice

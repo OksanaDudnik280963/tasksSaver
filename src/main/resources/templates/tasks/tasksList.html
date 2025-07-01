@@ -14,7 +14,7 @@
         <caption>Tasks List</caption>
         <thead class="table-header">
         <tr>
-            <th>Task Number</th>
+            <!--<th>Task Number</th>-->
             <th>Task Name</th>
             <th>Task Description</th>
             <th>Task Cost</th>
@@ -25,7 +25,7 @@
         </thead>
         <tbody>
         <tr th:each="task : ${tasks}">
-            <td th:text="${task.taskNumber}">Task Number</td>
+            <!--<td th:text="${task.taskNumber}">Task Number</td>-->
             <td th:text="${task.taskName}">Task Name</td>
             <td th:text="${task.taskDescription}">Task Description</td>
             <td th:text="${task.taskCost}">Task Cost</td>

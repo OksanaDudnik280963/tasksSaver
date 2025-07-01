@@ -1,7 +1,7 @@
-package com.tasks.calculator.services;
+package com.example.tasks.saver.services;
 
-import com.tasks.calculator.dto.User;
-import com.tasks.calculator.repositories.UserRepository;
+import com.example.tasks.saver.dto.User;
+import com.example.tasks.saver.repositories.UserRepository;
 import utils.com.example.tasks.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

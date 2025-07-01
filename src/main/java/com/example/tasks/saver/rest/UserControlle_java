@@ -1,8 +1,8 @@
-package com.tasks.calculator.rest;
+package com.example.tasks.saver.rest;
 
-import com.tasks.calculator.dto.User;
-import com.tasks.calculator.repositories.UserRepository;
-import com.tasks.calculator.services.UserService;
+import com.example.tasks.saver.dto.User;
+import com.example.tasks.saver.repositories.UserRepository;
+import com.example.tasks.saver.services.UserService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
