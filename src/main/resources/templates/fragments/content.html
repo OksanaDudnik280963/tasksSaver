@@ -1,0 +1,16 @@
+<div th:fragment="content(message)" xmlns:th="http://www.w3.org/1999/xhtml">
+    <p th:text="${message} ? ${message} : ''"></p>
+    <div th:insert>
+        <div class="container">
+
+        <div th:insert="fragments/errorMessage :: errorMessage(errMsg)">
+            <title th:text="${errMsg}"></title>
+        </div>
+
+        <br/><br/>
+        <div lang="en" th:replace="fragments/footer.html::footer()"></div>
+
+        </div>
+    </div>
+
+</div>

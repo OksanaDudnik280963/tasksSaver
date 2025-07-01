@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en" th:include="fragments/header :: header(metaTitle='Create New User')">
+    <title th:text="${metaTitle}"></title>
+</head>
+<body>
+<div id="creatingUser">
+    <form action="#" th:action="@{'/rest/api/users/save'}" th:object="${user}" method="post">
+        <table class="table table-striped">
+            <caption>User creation</caption>
+            <tr>
+                <td>
+                    <label th:text="${userName}" th:field="${user.userName}"/>
+                </td>
+                <td>
+                    <input type="text" th:field="*{userName}"/>
+                </td>
+                <td>
+                    <p th:if="${#fields.hasErrors('userName')}" th:errorclass="error" th:errors="*{userName}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label th:text="${'Password'}" th:field="${user.password}"/>
+                </td>
+                <td>
+                    <div class="input-group" id="show_hide_password">
+
+                        <input type="password" class="form-control" id="password" autocomplete="off"
+                               th:field="*{password}"/>
+
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <p th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label th:text="${'firstName'}" th:field="${user.firstName}"/>
+                </td>
+                <td><input type="text" th:field="${firstName}"></td>
+                <td>
+                    <p th:if="${#fields.hasErrors('firstName')}" th:errorclass="error" th:errors="*{firstName}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label th:text="${'lastName'}" th:field="${user.lastName}"/>
+                </td>
+                <td><input type="text" th:field="${lastName}"></td>
+                <td>
+                    <p th:if="${#fields.hasErrors('lastName')}" th:errorclass="error" th:errors="*{lastName}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label th:text="${'fullName'}" th:field="${user.fullName}"/>
+                </td>
+                <td>
+                    <input type="text" th:field="${fullName}">
+                </td>
+                <td>
+                    <p th:if="${#fields.hasErrors('fullName')}" th:errorclass="error" th:errors="*{fullName}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label th:text="${'email'}" th:field="${user.email}"/>
+                </td>
+                <td><input type="text" th:field="${email}"></td>
+                <td>
+                    <p th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label th:text="${'gender'}" th:field="${user.gender}"/>
+                </td>
+                <td>
+                    <select name="Gender" th:field="${user.gender}">
+                        <option th:each="gender : ${T(com.tasks.calculator.dto.enums.Gender).values()}"
+                                th:value="${gender}"
+                                th:text="${gender.name}"/>
+                    </select>
+                </td>
+                <td>
+                    <p th:if="${#fields.hasErrors('gender')}" th:errorclass="error" th:errors="*{gender}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label th:text="${phoneNumber}" th:field="${user.phoneNumber}"/>
+                </td>
+                <td><input type="text" th:field="${user.phoneNumber}"></td>
+                <td>
+                    <p th:if="${#fields.hasErrors('phoneNumber')}" th:errorclass="error" th:errors="*{phoneNumber}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label th:text="${picture}" th:field="${user.picture}"/>
+                </td>
+                <td><input type="text" th:field="${picture}"></td>
+                <td>
+                    <p th:if="${#fields.hasErrors('picture')}" th:errorclass="error" th:errors="*{picture}"></p>
+                </td>
+            </tr>
+            <tr th:each="${user.systems}">
+                <td>
+                    <label th:text="${systems}" th:field="${user.systems}"/>
+                </td>
+                <td>
+                    <div th:with="condition=${user.systems.size()!=0}">
+                        <div th:each="system : ${user.systems}">
+                            <select name="System" th:field="${system}">
+                                <option th:each="syst : ${T(com.tasks.calculator.dto.enums.SystemName).values()}"
+                                        th:value="${syst}"
+                                        th:text="${syst.name}"/>
+                            </select>
+                        </div>
+                    </div>
+
+
+                </td>
+                <td>
+                    <p th:if="${#fields.hasErrors('systems')}" th:errorclass="error" th:errors="*{systems}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label th:text="${roles}" th:field="${user.roles}"/>
+                </td>
+                <td>
+                    <label>
+                        <div th:each="role : ${user.roles}">
+                            <select name="Role" th:field="${user.roles}">
+                                <option th:each="rol : ${T(com.tasks.calculator.dto.enums.RoleName).values()}"
+                                        th:value="${rol}"
+                                        th:text="${rol.name}"/>
+                            </select>
+                        </div>
+                    </label>
+                </td>
+                <td>
+                    <p th:if="${#fields.hasErrors('roles')}" th:errorclass="error" th:errors="*{roles}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label th:text="${notes}" th:field="${user.notes}"/>
+                </td>
+                <td>
+                    <input type="text" th:field="${notes}">
+                </td>
+                <td>
+                    <p th:if="${#fields.hasErrors('notes')}" th:errorclass="error" th:errors="*{notes}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label th:text="${birthDate}" th:field="${user.birthDate}"/>
+                </td>
+                <td>
+                    <label>
+                        <input type="date" th:value="${{user.birthDate}}" th:field="${user.birthDate}"
+                               class="form-control">
+                    </label>
+                </td>
+                <td>
+                    <p th:if="${#fields.hasErrors('birthDate')}" th:errorclass="error" th:errors="*{birthDate}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <button type="submit" name="action">Save</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<br/><br/>
+<div lang="en" th:insert="fragments/footer.html::footer()"></div>
+
+</body>
+</html>
