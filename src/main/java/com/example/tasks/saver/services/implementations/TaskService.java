@@ -6,17 +6,12 @@ import com.example.tasks.saver.services.interfaces.TaskServiceInterface;
 import com.example.tasks.saver.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 
 @Slf4j
 @Service("taskService")
@@ -100,4 +95,37 @@ public class TaskService implements TaskServiceInterface {
             this.taskRepository.deleteById(id);
         }
     }
+
+    @Override
+    public List<Task> findAll(Sort sort) {
+        return this.taskRepository.findAll(sort);
+    }
+
+    @Override
+    public Page<Task> findAll(Pageable pageable) {
+        return this.taskRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Task> findPaginated(Pageable pageable) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Task> list;
+        List<Task> accounts = listTasks();
+        if (accounts.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, accounts.size());
+            list = accounts.subList(startItem, toIndex);
+        }
+
+        return new PageImpl<>(list, PageRequest.of(currentPage, pageSize), accounts.size());
+    }
+
+    @Override
+    public List<Task> listTasks() {
+        return taskRepository.findAll();
+    }
+
 }

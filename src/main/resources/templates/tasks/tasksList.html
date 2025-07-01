@@ -39,6 +39,7 @@
         </tbody>
     </table>
     <br/><br/>
+<!--
     <nav aria-label="Page navigation"  class="navbar navbar-expand-lg navbar-light bg-light">
         <ul class="pagination">
             <li class="page-item" th:classappend="${currentPage == 0 ? 'disabled' : ''}">
@@ -59,6 +60,16 @@
             </li>
         </ul>
     </nav>
+-->
+    <div th:if="${tasks.totalPages > 0}" class="pagination"
+         th:each="pageNumber : ${pageNumbers}">
+
+        <a th:href="@{'/rest/api/tasks/?page='+${pageNumber}+'&size='+${pageSize}}"
+           th:text="${pageNumber}"
+           th:class="(${pageNumber==tasksPage.number + 1} ? 'active':'')"></a>
+    </div>
+    <br/><br/>
+
 </div>
 <br/><br/>
 <div lang="en" th:replace="fragments/footer.html::footer"></div>

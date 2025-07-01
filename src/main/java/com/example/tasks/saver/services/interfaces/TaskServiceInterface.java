@@ -13,4 +13,8 @@ public interface TaskServiceInterface {
     Task save(Task task);
     Task get(Long id);
     void delete(long id);
+    List<Task> listTasks();
+    List<Task> findAll(Sort sort);
+    Page<Task> findAll(Pageable pageable);
+    Page<Task> findPaginated(Pageable pageable);
 }
