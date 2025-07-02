@@ -11,17 +11,13 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
-
     <!-- style.css -->
-    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link th:rel="stylesheet" th:href="@{css/style.css}"/>
     <!-- Bootstrap JS -->
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
-    <!-- link rel="stylesheet" th:href="@{webjars/bootstrap/4.1.3/css/bootstrap.min.css}"/-->
-    <link rel="stylesheet" th:href="@{../../public/css/style.css}"/>
-    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-    <script th:src="@{/js/bootstrap.min.js}"></script>
-
+    <link th:href="@{css/bootstrap.min.css}" th:rel="stylesheet"/>
+    <script th:src="@{js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{js/bootstrap.min.js}"></script>
     <!-- title -->
-    <title id="metaTitle" th:text="${metaTitle} ? ${metaTitle} : 'TasksKeeper'"></title>
+    <title id="metaTitle" th:text="${metaTitle} ? ${metaTitle} : 'TasksSaver'"></title>
 </head>
 

@@ -12,6 +12,7 @@
     <form action="#" th:action="@{/rest/api/tasks/save}" th:object="${task}" method="post">
 
         <table>
+<!--
             <tr>
                 <td>
                     <label th:text="${'TaskNumber'}" th:field="${task.taskNumber}"></label>
@@ -23,6 +24,7 @@
                     <p th:if="${#fields.hasErrors('taskNumber')}" th:errorclass="error" th:errors="*{taskNumber}"></p>
                 </td>
             </tr>
+-->
 
             <tr>
                 <td>
@@ -91,6 +93,6 @@
     </form>
 </div>
 <br/><br/>
-<div lang="en" th:replace="fragments/footer.html::footer()"></div>
+<div lang="en" th:replace="fragments/footer.html::footer"></div>
 </body>
 </html>

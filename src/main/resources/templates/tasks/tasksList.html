@@ -61,7 +61,7 @@
         </ul>
     </nav>
 -->
-    <div th:if="${tasks.totalPages > 0}" class="pagination"
+    <div th:if="${!tasks.isEmpty()}" class="pagination"
          th:each="pageNumber : ${pageNumbers}">
 
         <a th:href="@{'/rest/api/tasks/?page='+${pageNumber}+'&size='+${pageSize}}"
