@@ -14,13 +14,13 @@ import java.math.BigDecimal;
 @EqualsAndHashCode(callSuper = false)
 @Builder
 @AllArgsConstructor
-//@NoArgsConstructor
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonRootName(value = "task")
 public class Task extends Audit{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "TASK_ID", nullable = false, unique = true, insertable = false, updatable = false)
+    @Column(name = "TASK_ID", nullable = false, unique = true)
     private Long id;
 
     //@GeneratedValue(strategy = GenerationType.AUTO)

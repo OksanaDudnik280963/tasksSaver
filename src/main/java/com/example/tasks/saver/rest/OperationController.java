@@ -36,7 +36,7 @@ public class OperationController {
 
     @GetMapping(value = "/", produces = {APPLICATION_JSON_VALUE})
     public String listAll(Model model, @RequestParam(defaultValue = "0") int page) {
-        Page<Operation> operations = this.operationRepository.findAll(PageRequest.of(page, 10));
+        Page<Operation> operations = (Page<Operation>) this.operationRepository.findAll();////??????
         model.addAttribute("operations", operations);
         model.addAttribute("currentPage", page);
         model.addAttribute(VIEW_NAME, "/operations/operationsList");

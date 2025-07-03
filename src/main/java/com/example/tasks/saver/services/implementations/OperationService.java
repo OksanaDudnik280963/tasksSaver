@@ -81,7 +81,7 @@ public class OperationService implements OperationServiceInterface {
         return this.operationRepository.existsById(id);
     }
 
-    @Transactional(value = "transactionManager", propagation = Propagation.REQUIRES_NEW, rollbackFor = {Throwable.class})
+   // @Transactional(value = "transactionManager", propagation = Propagation.REQUIRES_NEW, rollbackFor = {Throwable.class})
     public void delete(long id) {
         if (!existsById(id)) {
             throw new NoSuchElementException();

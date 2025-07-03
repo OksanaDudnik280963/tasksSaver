@@ -6,14 +6,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TaskServiceInterface {
-    ////List<Task> findSortAll(Sort sort);
-    ////Page<Task> findPageableAll(Pageable pageable);
+    List<Task> findAll();
+    Task fillTaskByDefault(Optional<Task> taskOptional);
+    Long count();
     Task save(Task task);
-    Task get(Long id);
+    Optional<Task> get(Long id) throws Exception;
     void delete(long id);
-    List<Task> listTasks();
     List<Task> findAll(Sort sort);
     Page<Task> findAll(Pageable pageable);
     Page<Task> findPaginated(Pageable pageable);

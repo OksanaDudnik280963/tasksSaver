@@ -1,7 +1,6 @@
 package com.example.tasks.saver.rest;
 
 import com.example.tasks.saver.dto.Task;
-import com.example.tasks.saver.dto.enums.TasksStatus;
 import com.example.tasks.saver.repositories.TaskRepository;
 import com.example.tasks.saver.services.implementations.TaskService;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
@@ -77,33 +75,49 @@ public class TaskController {
     }
 
 
-    @GetMapping(value = "/new")//, consumes = {APPLICATION_JSON_VALUE}, produces = {APPLICATION_JSON_VALUE})
+    @GetMapping(value = "/new")
     public String showNewTaskPage(Model model, @RequestBody Optional<Task> taskRequest) {
-        if(taskRequest.isEmpty()){
-            Task task= Task.builder()
-                    .id(1L)
-                    .taskCost(BigDecimal.ZERO)
-                    .taskDescription("New task")
-                    .taskName("New task")
-                    .taskStatus(TasksStatus.PROJECT.name())
-                    .operationsCount(0L)
-                    .build();
-            taskRequest=Optional.of(task);
-        }
+        taskRequest = Optional.of(this.taskService.fillTaskByDefault(taskRequest));
         model.addAttribute("task", taskRequest.get());
         return NEW_TASK;
     }
 
-    @PostMapping(value = "/save")//, consumes = {APPLICATION_JSON_VALUE}, produces = {APPLICATION_JSON_VALUE})
-    public String saveTask(@ModelAttribute("task") Task task) {
+    @PostMapping(value = "/save")
+    public ModelAndView saveTask(@ModelAttribute("task") Task task) {
         this.taskService.save(task);
-        return EDIT_TASK;
+        return listAll(Optional.of(1), Optional.of(5));
     }
 
-    @DeleteMapping(value = "/delete/{id}", consumes = {APPLICATION_JSON_VALUE}, produces = {APPLICATION_JSON_VALUE})
-    public String deleteTask(@PathVariable(name = "id") Long id) {
+    @GetMapping(value = "/edit/{id}")
+    public ModelAndView editTaskById(@PathVariable String id) throws Exception {
+        Task realTask = this.taskService.get(Long.valueOf(id)).orElseThrow(() -> new Exception("Id is wrong!"));
+        ModelAndView modelAndView = new ModelAndView(EDIT_TASK);
+        realTask = this.taskService.fillTaskByDefault(Optional.of(realTask));
+        modelAndView.addObject("task", realTask);
+        return modelAndView;
+    }
+
+    @PostMapping(value = "/edit")
+    public ModelAndView save(@ModelAttribute("task") Task task) {
+
+        ModelAndView modelAndView = new ModelAndView(EDIT_TASK);
+        modelAndView.addObject("task", task);
+        try {
+            this.taskService.save(task);
+        } catch (Exception ex) {
+            String exMessage = ex.getMessage();
+            ModelAndView model = new ModelAndView(ERR_PAGE);
+            model.addObject(ERR_MSG, exMessage);
+            log.error(exMessage);
+            return model;
+        }
+        return listAll(Optional.of(1), Optional.of(5));
+    }
+
+    @GetMapping(value = "/delete/{id}")
+    public ModelAndView deleteTask(@PathVariable(name = "id") Long id) {
         this.taskService.delete(id);
-        return REDIRECT + TASKS_PAGE;
+        return listAll(Optional.of(1), Optional.of(5));
     }
 
 }
