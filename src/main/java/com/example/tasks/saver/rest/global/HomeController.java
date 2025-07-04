@@ -8,26 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.*;
 
+import static com.example.tasks.saver.dto.enums.ItemNames.*;
+import static com.example.tasks.saver.global.InstallConstants.HOME_PAGE;
+
 @Controller
-@RequestMapping(value = {"/rest/api/home"})
+@RequestMapping(value = {"/rest/api/tasks"})
 public class HomeController {
-    public static final String ERR_MSG = "errMsg";
-    public static final String ERR_PAGE = "/errors/error";
-    public static final String REDIRECT = "redirect:";
-    public static final String VIEW_NAME = "viewName";
 
-    @RequestMapping(value = {"/openItem"})
-    public String root(Locale locale, ModelMap model) {
+
+    @RequestMapping(value = {"/home"})
+    public String root(ModelMap model) {
         model.addAttribute("content", "content");
-
-        List<String> items = new ArrayList<>();
-        items.add(ItemNames.IASKS_LIST.name());
-        items.add(ItemNames.CREATION_TASK.name());
-        items.add(ItemNames.OPERATIONS_LIST.name());
-        items.add(ItemNames.CREATION_OPERATION.name());
-        items.add(ItemNames.CALCULATE_TASK_COST.name());
-
-        model.addAttribute("items", items);
-        return "home";
+        ItemNames.Item.findAll();
+        model.addAttribute("items", ItemNames.items);
+        return HOME_PAGE;
     }
 }

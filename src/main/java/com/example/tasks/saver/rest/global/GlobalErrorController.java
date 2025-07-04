@@ -1,4 +1,4 @@
-package com.optum.payment.system.controllers.global;
+package com.example.tasks.saver.rest.global;
 
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.IOException;
 
-@Controller
-@RequestMapping(value = "/api/payment")
-public class GlobalErrorController implements ErrorController {
-    private static final String PATH = "/error";
+import static com.example.tasks.saver.global.InstallConstants.PATH_ERROR;
 
-    @RequestMapping(value = PATH)
+@Controller
+@RequestMapping(value = "/rest/api/tasks/errors")
+public class GlobalErrorController implements ErrorController {
+
+
+    @RequestMapping(value = PATH_ERROR)
     public void error(HttpServletResponse response) throws IOException {
         int status = response.getStatus();
         switch (status) {

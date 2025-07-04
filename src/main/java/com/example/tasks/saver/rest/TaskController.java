@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
+import static com.example.tasks.saver.global.InstallConstants.*;
 import static com.example.tasks.saver.utils.JsonUtils.toJson;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -23,12 +24,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Controller
 @RequestMapping("/rest/api/tasks")
 public class TaskController {
-    public static final String ERR_MSG = "errMsg";
-    public static final String ERR_PAGE = "/errors/error";
-    public static final String TASKS_PAGE = "/tasks/tasksList";
-    public static final String EDIT_TASK = "/tasks/edit_task";
-    public static final String NEW_TASK = "/tasks/new_task";
-    public static final String REDIRECT = "redirect:";
 
     private final TaskRepository taskRepository;
     private final TaskService taskService;
@@ -50,7 +45,6 @@ public class TaskController {
         ModelAndView model = new ModelAndView(TASKS_PAGE);
         model.addObject("metaTitle", "Tasks List.");
         model.addObject("tasks", tasksPage.getContent());
-        //modelAndView.addObject("tasks", tasksPage.getContent());
         model.addObject("currentPage", currentPage);
         model.addObject("pageSize", pageSize);
         model.addObject("tasksPage", tasksPage);
