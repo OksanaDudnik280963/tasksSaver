@@ -1,8 +1,10 @@
 package com.example.tasks.saver.services.implementations;
 
+import com.example.tasks.saver.dto.Operation;
 import com.example.tasks.saver.dto.Task;
 import com.example.tasks.saver.dto.enums.RoleName;
 import com.example.tasks.saver.dto.enums.TasksStatus;
+import com.example.tasks.saver.repositories.OperationRepository;
 import com.example.tasks.saver.repositories.TaskRepository;
 import com.example.tasks.saver.services.interfaces.TaskServiceInterface;
 import com.example.tasks.saver.utils.JsonUtils;
@@ -21,10 +23,12 @@ import static com.example.tasks.saver.global.InstallConstants.START_TASK_NAME;
 public class TaskService implements TaskServiceInterface {
 
     private final TaskRepository taskRepository;
+    private final OperationRepository operationRepository;
 
     @Autowired
-    public TaskService(TaskRepository repository) {
+    public TaskService(TaskRepository repository, OperationRepository operationRepository) {
         this.taskRepository = repository;
+        this.operationRepository = operationRepository;
     }
 
     public Long count() {
@@ -121,6 +125,13 @@ public class TaskService implements TaskServiceInterface {
     public Optional<Task> get(Long id) throws Exception {
         Optional<Task> value = this.taskRepository.findById(id);
         return Optional.ofNullable(value.orElseThrow(() -> new Exception("Id is wrong!")));
+    }
+    public List<Operation> getOperationsByTaskId(Long id){
+        Optional<Task> task = this.taskRepository.findById(id);
+        if(task.isEmpty()){
+            return new ArrayList<>();
+        }
+        return this.operationRepository.findByTaskName(task.get().getTaskName());
     }
 
     public void delete(long id) throws NoSuchElementException {

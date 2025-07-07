@@ -1,6 +1,5 @@
 package com.example.tasks.saver.dto;
 
-import com.example.tasks.saver.dto.enums.OperationStatus;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -8,9 +7,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
-
-import static com.example.tasks.saver.global.InstallConstants.START_OPERATION_NAME;
-import static com.example.tasks.saver.global.InstallConstants.START_TASK_NAME;
 
 @Entity(name = "Operation")
 @Data
@@ -29,7 +25,7 @@ public class Operation extends Audit {
 
     @Column(name = "OPERATION_PRICE", nullable = false)
     @JsonProperty
-    private BigDecimal operationPrice = BigDecimal.ZERO;
+    private BigDecimal operationPrice;
 
     @Column(name = "OPERATION_NAME", nullable = false, unique = true)
     @JsonProperty
@@ -38,7 +34,7 @@ public class Operation extends Audit {
 
     @Column(name = "OPERATION_STATUS")
     @JsonProperty
-    private String operationStatus = OperationStatus.START.name();
+    private String operationStatus;
 
 
 
@@ -49,6 +45,6 @@ public class Operation extends Audit {
 
     @Column(name = "OPERATION_DESCRIPTION")
     @JsonProperty
-    private String operationDescription = START_OPERATION_NAME;
+    private String operationDescription;
 
 }

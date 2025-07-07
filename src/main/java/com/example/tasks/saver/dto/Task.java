@@ -36,19 +36,19 @@ public class Task extends Audit{
 
     @Column(name = "TASK_DESCRIPTION")
     @JsonProperty
-    private String taskDescription = START_TASK_NAME;
+    private String taskDescription;
 
     @Column(name = "TASK_COST")
     @JsonProperty
-    private BigDecimal taskCost = BigDecimal.ZERO;
+    private BigDecimal taskCost;
 
     @Column(name = "OPERATION_COUNT")
     @JsonProperty
-    private Long operationsCount = 0L;
+    private Long operationsCount;
 
     @Column(name = "TASK_STATUS")
     @JsonProperty
-    private String taskStatus = TasksStatus.PROJECT.name();
+    private String taskStatus;
 
 /*
     @OneToMany(fetch = FetchType.EAGER, targetEntity = Task.class, cascade = CascadeType.ALL, orphanRemoval = true)

@@ -1,6 +1,8 @@
 package com.example.tasks.saver.rest;
 
+import com.example.tasks.saver.dto.Operation;
 import com.example.tasks.saver.dto.Task;
+import com.example.tasks.saver.repositories.OperationRepository;
 import com.example.tasks.saver.repositories.TaskRepository;
 import com.example.tasks.saver.services.implementations.TaskService;
 import lombok.extern.slf4j.Slf4j;
@@ -26,11 +28,13 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class TaskController {
 
     private final TaskRepository taskRepository;
+    private final OperationRepository operationRepository;
     private final TaskService taskService;
 
     @Autowired
-    public TaskController(TaskRepository taskRepository) {
-        this.taskService = new TaskService(taskRepository);
+    public TaskController(OperationRepository operationRepository, TaskRepository taskRepository) {
+        this.operationRepository = operationRepository;
+        this.taskService = new TaskService(taskRepository, operationRepository);
         this.taskRepository = taskRepository;
     }
 
@@ -68,6 +72,18 @@ public class TaskController {
         }
     }
 
+    @GetMapping(value = "/list/operations/{taskId}", produces = APPLICATION_JSON_VALUE)
+    public ModelAndView listFilteredOperationsAllForTask(@PathVariable("taskId") Long taskId) throws Exception {
+        Task realTask = this.taskService.get(Long.valueOf(taskId)).orElseThrow(() -> new Exception("Id is wrong!"));
+        List<Operation> operationsForTask = this.taskService.getOperationsByTaskId(Long.valueOf(taskId));
+        ModelAndView modelAndView = new ModelAndView(TASK_OPERATIONS_PAGE);
+        realTask = this.taskService.fillTaskByDefault(Optional.of(realTask));
+        modelAndView.addObject("taskId", taskId);
+        modelAndView.addObject("task", realTask);
+        modelAndView.addObject("operationsForTask", operationsForTask);
+        return modelAndView;
+    }
+
 
     @GetMapping(value = "/new")
     public String showNewTaskPage(Model model, @RequestBody Optional<Task> taskRequest) {
@@ -87,7 +103,10 @@ public class TaskController {
         Task realTask = this.taskService.get(Long.valueOf(id)).orElseThrow(() -> new Exception("Id is wrong!"));
         ModelAndView modelAndView = new ModelAndView(EDIT_TASK);
         realTask = this.taskService.fillTaskByDefault(Optional.of(realTask));
+        List<Operation> taskOperationsList = this.taskService.getOperationsByTaskId(Long.valueOf(id));
         modelAndView.addObject("task", realTask);
+        modelAndView.addObject("taskOperationsList", taskOperationsList);
+        modelAndView.addObject("taskOperationsListUrl", TASK_OPERATIONS_URL + id);
         return modelAndView;
     }
 

@@ -22,7 +22,8 @@ public class InstallConstants {
     public static final String NEW_TASK = "/tasks/new_task";
     public static final String NEW_TASK_URL = "/rest/api/tasks/new";
     public static final String DELETE_TASK_URL = "/rest/api/tasks/delete/";
-
+    public static final String TASK_OPERATIONS_PAGE = "/tasks/task_operations";
+    public static final String TASK_OPERATIONS_URL ="/rest/api/tasks/operations/list/";//+${task.id};
     public static final String REDIRECT = "redirect:";
     public static final String VIEW_NAME = "viewName";
 

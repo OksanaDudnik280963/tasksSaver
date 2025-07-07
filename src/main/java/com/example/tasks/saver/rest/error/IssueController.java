@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.IOException;
 
+import static com.example.tasks.saver.global.InstallConstants.PATH_ERROR;
+
 @Controller
 @RequestMapping(value = "/rest/api/tasks/errors")
 public class IssueController implements org.springframework.boot.web.servlet.error.ErrorController {
@@ -17,9 +19,9 @@ public class IssueController implements org.springframework.boot.web.servlet.err
         return null;
     }
 
-    private static final String PATH = "/";
 
-    @GetMapping(value = PATH, consumes = MediaType.APPLICATION_JSON_VALUE)
+
+    @GetMapping(value = PATH_ERROR, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void error(HttpServletResponse response) throws IOException {
         int status = response.getStatus();
         switch (status) {

@@ -11,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -21,7 +20,6 @@ import static com.example.tasks.saver.global.InstallConstants.START_TASK_NAME;
 
 @Slf4j
 @Service("operationService")
-//@Transactional
 public class OperationService implements OperationServiceInterface {
     private final OperationRepository operationRepository;
 

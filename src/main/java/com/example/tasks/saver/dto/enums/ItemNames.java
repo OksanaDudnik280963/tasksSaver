@@ -1,6 +1,5 @@
 package com.example.tasks.saver.dto.enums;
 
-import com.example.tasks.saver.services.interfaces.TaskServiceInterface;
 import lombok.*;
 
 import java.util.ArrayList;
