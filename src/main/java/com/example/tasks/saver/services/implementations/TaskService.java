@@ -144,18 +144,6 @@ public class TaskService implements TaskServiceInterface {
         }
     }
 
-/*
-    @Override
-    public List<Task> findAll(Sort sort) {
-        return (List<Task>) this.taskRepository.findAll(Sort.by("ID"));
-    }
-
-    @Override
-    public Page<Task> findAll(Pageable pageable) {
-        return (Page<Task>) this.taskRepository.findAll((Sort) pageable);
-    }
-
-*/
     @Override
     public Page<Task> findPaginated(Pageable pageable) {
         int pageSize = pageable.getPageSize();

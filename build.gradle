@@ -69,3 +69,18 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.example.tasks.saver.TasksSaverApplication'
+    }
+
+    from 'src/main/webapp', sourceSets.main.output
+
+    version = '0.1.0'
+
+}
+springBoot {
+    mainClass = 'com.example.tasks.saver.TasksSaverApplication'
+}
+
