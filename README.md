@@ -21,15 +21,16 @@ https://github.com/OksanaDudnik280963/tasksSaver
 by command 
 `git clone https://github.com/OksanaDudnik280963/tasksSaver.git`
 ##### 3. Please start spring boot application
+with IntelliJ Idea
 ##### 4. Go to the home page:
 `localhost:8080/rest/api/tasks/home`
 See `images/home_page.pdf`
-![images/home_page.pdf](/images/home_page.pdf)
+![images/home_page.pdf](images/home_page.pdf)
 ##### 5. Click on the point 1.
 `Tasks list with status.`
 Loading page  as show on screenshot
 `lib/tasks_list.pdf`
-![images/tasks_list.pdf](/images/tasks_list.pdf)
+![images/tasks_list.pdf](images/tasks_list.pdf)
 ##### 6. Create tasks
 (click on the button 'Create new task')
 ##### 7. Edit tasks.
@@ -38,4 +39,5 @@ Loading page  as show on screenshot
 ![images/edit_task.pdf](images/edit_task.pdf)
 ##### 8. Click in the home page on the point 5
 `Operations list with status.`
-##### 6. Create and edit operations.
+![images/operations_list.pdf](images/operations_list.pdf)
+##### 9. Create and edit operations.
