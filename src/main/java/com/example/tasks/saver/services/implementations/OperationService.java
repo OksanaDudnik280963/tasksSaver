@@ -89,7 +89,6 @@ public class OperationService implements OperationServiceInterface {
                 Operation realOperation = operationOptional.get();
                 Operation updated = Operation.builder()
                         .id(realOperation.getId())
-                        //.operationNumber(realOperation.getOperationNumber())
                         .taskName(realOperation.getTaskName())
                         .operationDescription(realOperation.getOperationDescription())
                         .operationStatus(operation.getOperationStatus())
@@ -116,13 +115,6 @@ public class OperationService implements OperationServiceInterface {
         }
     }
 
-    public Optional<Operation> findByTaskNameAndOperationName(String taskName, String operationName) {
-        return this.operationRepository.findByTaskNameAndOperationName(taskName, operationName);
-    }
-
-    public Optional<Operation> findByOperationName(String operationName) {
-        return this.operationRepository.findByOperationName(operationName);
-    }
 
     @Override
     public List<Operation> findByTaskName(String taskName) {

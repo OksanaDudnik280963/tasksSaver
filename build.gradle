@@ -58,6 +58,7 @@ dependencies {
 	implementation 'org.slf4j:slf4j-api:2.0.7'
 
 	implementation 'org.webjars:bootstrap:5.3.3'
+    implementation 'org.webjars:jquery:3.6.0'
 
 	runtimeOnly 'com.mysql:mysql-connector-j'
 

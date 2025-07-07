@@ -3,8 +3,6 @@ package com.example.tasks.saver.global;
 public class InstallConstants {
     InstallConstants() {
     }
-
-    public static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     public static final String DATABASE_NAME = "tasks";
     public static final String USER = "root";
     //@Value("${db.password}")
@@ -34,7 +32,6 @@ public class InstallConstants {
     public static final String LIST_OPERATIONS = "/operations/operationsList";
     public static final String LIST_OPERATIONS_URL = "/rest/api/tasks/operations/list";
     public static final String DELETE_OPERATION_URL = "/rest/api/tasks/operations/delete/";
-    ////public static final String CALCULATE_COST = "/operations/calculate_cost";
     public static final String PAGES_URL = "/rest/api/tasks";
     public static final String HOME_PAGE = "home";
 

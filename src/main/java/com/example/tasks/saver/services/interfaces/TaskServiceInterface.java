@@ -17,7 +17,9 @@ public interface TaskServiceInterface {
     Optional<Task> get(Long id) throws Exception;
     List<Operation> getOperationsByTaskId(Long id);
     void delete(long id);
+/*
     List<Task> findAll(Sort sort);
     Page<Task> findAll(Pageable pageable);
+*/
     Page<Task> findPaginated(Pageable pageable);
 }

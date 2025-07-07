@@ -14,4 +14,10 @@ Read please
 for understanding how you can create MySQL 
 #####        database "task" with user "root" and password "Libra28091963!"
 
-##### 2.
+##### 2. Start MySQL server and create database "tasks"
+##### 3. Please clone git repository from
+https://github.com/OksanaDudnik280963/tasksSaver
+
+by command 
+git clone 
+##### 3. Please start spring boot application

@@ -15,12 +15,6 @@ import static com.example.tasks.saver.global.InstallConstants.PATH_ERROR;
 @RequestMapping(value = "/rest/api/tasks/errors")
 public class IssueController implements org.springframework.boot.web.servlet.error.ErrorController {
 
-    public String getErrorPath() {
-        return null;
-    }
-
-
-
     @GetMapping(value = PATH_ERROR, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void error(HttpServletResponse response) throws IOException {
         int status = response.getStatus();

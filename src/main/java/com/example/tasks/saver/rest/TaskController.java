@@ -45,7 +45,7 @@ public class TaskController {
         int pageSize = size.orElse(5);
 
         Page<Task> tasksPage = this.taskService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
-        List<Task> tasks = (List<Task>) tasksPage.getContent();
+        List<Task> tasks = tasksPage.getContent();
         ModelAndView model = new ModelAndView(TASKS_PAGE);
         model.addObject("metaTitle", "Tasks List.");
         model.addObject("tasks", tasksPage.getContent());
@@ -74,8 +74,8 @@ public class TaskController {
 
     @GetMapping(value = "/list/operations/{taskId}", produces = APPLICATION_JSON_VALUE)
     public ModelAndView listFilteredOperationsAllForTask(@PathVariable("taskId") Long taskId) throws Exception {
-        Task realTask = this.taskService.get(Long.valueOf(taskId)).orElseThrow(() -> new Exception("Id is wrong!"));
-        List<Operation> operationsForTask = this.taskService.getOperationsByTaskId(Long.valueOf(taskId));
+        Task realTask = this.taskService.get(taskId).orElseThrow(() -> new Exception("Id is wrong!"));
+        List<Operation> operationsForTask = this.taskService.getOperationsByTaskId(taskId);
         ModelAndView modelAndView = new ModelAndView(TASK_OPERATIONS_PAGE);
         realTask = this.taskService.fillTaskByDefault(Optional.of(realTask));
         modelAndView.addObject("taskId", taskId);

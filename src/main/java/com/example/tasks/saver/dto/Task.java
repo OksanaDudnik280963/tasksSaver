@@ -1,19 +1,13 @@
 package com.example.tasks.saver.dto;
 
-import com.example.tasks.saver.dto.enums.TasksStatus;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.Builder.Default;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.example.tasks.saver.global.InstallConstants.START_TASK_NAME;
 
 @Entity(name = "Task")
 @Data
