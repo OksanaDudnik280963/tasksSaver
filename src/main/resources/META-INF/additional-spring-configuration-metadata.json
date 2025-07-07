@@ -1,0 +1,133 @@
+{
+  "properties": [
+    {
+      "name": "spring.datasource.name",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.name."
+    },
+    {
+      "name": "spring.datasource.username",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.username."
+    },
+    {
+      "name": "spring.datasource.password",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.password."
+    },
+    {
+      "name": "spring.datasource.driver-class-name",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.driver-class-name."
+    },
+    {
+      "name": "spring.jpa.properties.hibernate.dialect",
+      "type": "java.lang.String",
+      "description": "Description for spring.jpa.properties.hibernate.dialect."
+    },
+    {
+      "name": "spring.jpa.properties.hibernate.dialect.storage_engine",
+      "type": "java.lang.String",
+      "description": "Description for spring.jpa.properties.hibernate.dialect.storage_engine."
+    },
+    {
+      "name": "spring.datasource.url",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.url."
+    },
+    {
+      "name": "spring.jpa.properties.javax.persistence.schema-generation.create-database-schemas",
+      "type": "java.lang.String",
+      "description": "Description for spring.jpa.properties.javax.persistence.schema-generation.create-database-schemas."
+    },
+    {
+      "name": "spring.jpa.properties.javax.persistence.schema-generation.create-source",
+      "type": "java.lang.String",
+      "description": "Description for spring.jpa.properties.javax.persistence.schema-generation.create-source."
+    },
+    {
+      "name": "spring.jpa.properties.javax.persistence.schema-generation.drop-source",
+      "type": "java.lang.String",
+      "description": "Description for spring.jpa.properties.javax.persistence.schema-generation.drop-source."
+    },
+    {
+      "name": "spring.sql.init.encoding",
+      "type": "java.lang.String",
+      "description": "Description for spring.sql.init.encoding."
+    },
+    {
+      "name": "spring.data.jpa.repositories.enabled",
+      "type": "java.lang.String",
+      "description": "Description for spring.data.jpa.repositories.enabled."
+    },
+    {
+      "name": "spring.jpa.database-platform",
+      "type": "java.lang.String",
+      "description": "Description for spring.jpa.database-platform."
+    },
+    {
+      "name": "spring.jpa.properties.hibernate.format_sql",
+      "type": "java.lang.String",
+      "description": "Description for spring.jpa.properties.hibernate.format_sql."
+    },
+    {
+      "name": "spring.jpa.generate-ddl",
+      "type": "java.lang.String",
+      "description": "Description for spring.jpa.generate-ddl."
+    },
+    {
+      "name": "spring.jpa.hibernate.ddl-auto",
+      "type": "java.lang.String",
+      "description": "Description for spring.jpa.hibernate.ddl-auto."
+    },
+    {
+      "name": "spring.jpa.hibernate.naming.physical-strategy",
+      "type": "java.lang.String",
+      "description": "Description for spring.jpa.hibernate.naming.physical-strategy."
+    },
+    {
+      "name": "spring.jpa.database",
+      "type": "java.lang.String",
+      "description": "Description for spring.jpa.database."
+    },
+    {
+      "name": "spring.jpa.show-sql",
+      "type": "java.lang.String",
+      "description": "Description for spring.jpa.show-sql."
+    },
+    {
+      "name": "spring.jpa.properties.hibernate.show_sql",
+      "type": "java.lang.String",
+      "description": "Description for spring.jpa.properties.hibernate.show_sql."
+    },
+    {
+      "name": "spring.jpa.properties.hibernate.use_sql_comments",
+      "type": "java.lang.String",
+      "description": "Description for spring.jpa.properties.hibernate.use_sql_comments."
+    },
+    {
+      "name": "spring.thymeleaf.check-template",
+      "type": "java.lang.String",
+      "description": "Description for spring.thymeleaf.check-template."
+    },
+    {
+      "name": "spring.thymeleaf.enabled",
+      "type": "java.lang.String",
+      "description": "Description for spring.thymeleaf.enabled."
+    },
+    {
+      "name": "spring.thymeleaf.check-template-location",
+      "type": "java.lang.String",
+      "description": "Description for spring.thymeleaf.check-template-location."
+    },
+    {
+      "name": "spring.thymeleaf.suffix",
+      "type": "java.lang.String",
+      "description": "Description for spring.thymeleaf.suffix."
+    },
+    {
+      "name": "server.error.whitelabel.enabled",
+      "type": "java.lang.String",
+      "description": "Description for server.error.whitelabel.enabled."
+    }
+  ] }
