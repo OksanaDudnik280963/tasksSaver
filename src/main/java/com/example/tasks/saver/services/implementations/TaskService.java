@@ -1,24 +1,23 @@
 package com.example.tasks.saver.services.implementations;
 
 import com.example.tasks.saver.dto.Task;
+import com.example.tasks.saver.dto.enums.RoleName;
 import com.example.tasks.saver.dto.enums.TasksStatus;
 import com.example.tasks.saver.repositories.TaskRepository;
 import com.example.tasks.saver.services.interfaces.TaskServiceInterface;
 import com.example.tasks.saver.utils.JsonUtils;
-import jakarta.persistence.Id;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.*;
 
+import static com.example.tasks.saver.global.InstallConstants.START_TASK_NAME;
+
 @Slf4j
 @Service("taskService")
-//@Transactional
 public class TaskService implements TaskServiceInterface {
 
     private final TaskRepository taskRepository;
@@ -38,30 +37,35 @@ public class TaskService implements TaskServiceInterface {
         }
         if (taskOptional.isEmpty()) {
             Task task = Task.builder()
-                    //.id(count() + 1L)
                     .taskCost(BigDecimal.ZERO)
-                    .taskDescription("New task")
-                    .taskName("New task")
+                    .taskDescription(START_TASK_NAME)
+                    .taskName(START_TASK_NAME)
                     .taskStatus(TasksStatus.PROJECT.name())
                     .operationsCount(0L)
                     .build();
             task.setCreated(new Date());
             task.setUpdated(new Date());
-            task.setCreatedBy("admin");
-            task.setChangedBy("admin");
+            task.setCreatedBy(RoleName.MANAGER.name());
+            task.setChangedBy(RoleName.MANAGER.name());
             taskOptional = Optional.of(task);
             return taskOptional.get();
         } else {
             Task task = Task.builder()
-                    .id((taskOptional.get().getId() != null) ? taskOptional.get().getId() : (count() + 1L))
-                    .taskCost((taskOptional.get().getTaskCost() == null) ? BigDecimal.ZERO : taskOptional.get().getTaskCost())
-                    .taskDescription((taskOptional.get().getTaskDescription().isEmpty()) ? "New task" : taskOptional.get().getTaskDescription())
-                    .taskName((taskOptional.get().getTaskName().isEmpty()) ? "New task" : taskOptional.get().getTaskName())
-                    .taskStatus((taskOptional.get().getTaskStatus() != null) ? taskOptional.get().getTaskStatus() : TasksStatus.PROJECT.name())
-                    .operationsCount((taskOptional.get().getOperationsCount() > 0L) ? taskOptional.get().getOperationsCount() : 0L)
+                    .id((taskOptional.get().getId() != null) ? taskOptional.get().getId()
+                            : (count() + 1L))
+                    .taskCost((taskOptional.get().getTaskCost() == null) ? BigDecimal.ZERO
+                            : taskOptional.get().getTaskCost())
+                    .taskDescription((taskOptional.get().getTaskDescription().isEmpty()) ? START_TASK_NAME
+                            : taskOptional.get().getTaskDescription())
+                    .taskName((taskOptional.get().getTaskName().isEmpty()) ? START_TASK_NAME
+                            : taskOptional.get().getTaskName())
+                    .taskStatus((taskOptional.get().getTaskStatus() != null) ? taskOptional.get().getTaskStatus()
+                            : TasksStatus.PROJECT.name())
+                    .operationsCount((taskOptional.get().getOperationsCount() > 0L) ? taskOptional.get().getOperationsCount()
+                            : 0L)
                     .build();
             task.setUpdated(new Date());
-            task.setChangedBy("admin");
+            task.setChangedBy(RoleName.MANAGER.name());
             taskOptional = Optional.of(task);
             return taskOptional.get();
         }
@@ -94,7 +98,6 @@ public class TaskService implements TaskServiceInterface {
 
                     Task updated = Task.builder()
                             .id(realTask.getId())
-                            //.taskNumber(realTask.getTaskNumber())
                             .taskName(task.getTaskName())
                             .taskDescription(task.getTaskDescription())
                             .taskStatus(task.getTaskStatus())
@@ -120,7 +123,6 @@ public class TaskService implements TaskServiceInterface {
         return Optional.ofNullable(value.orElseThrow(() -> new Exception("Id is wrong!")));
     }
 
-   // @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = {Throwable.class})
     public void delete(long id) throws NoSuchElementException {
         if (!existsById(id)) {
             throw new NoSuchElementException();

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      lang="ru">
+      lang="en">
 <head lang="en" th:include="fragments/header :: header(metaTitle='Edit Task')">
     <title th:id="metaTitle">Edit Task</title>
 </head>
@@ -12,20 +12,6 @@
     <form action="#" th:action="@{/rest/api/tasks/save}" th:object="${task}" method="post">
 
         <table>
-<!--
-            <tr>
-                <td>
-                    <label th:text="${'TaskNumber'}" th:field="${task.taskNumber}"></label>
-                </td>
-                <td>
-                    <input type="number" th:field="${task.taskNumber}" th:disabled="true"/>
-                </td>
-                <td>
-                    <p th:if="${#fields.hasErrors('taskNumber')}" th:errorclass="error" th:errors="*{taskNumber}"></p>
-                </td>
-            </tr>
--->
-
             <tr>
                 <td>
                     <label th:text="${'TaskName'}" th:field="${task.taskName}"></label>

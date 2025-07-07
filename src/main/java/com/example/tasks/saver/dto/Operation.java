@@ -1,5 +1,6 @@
 package com.example.tasks.saver.dto;
 
+import com.example.tasks.saver.dto.enums.OperationStatus;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -8,8 +9,10 @@ import lombok.*;
 
 import java.math.BigDecimal;
 
+import static com.example.tasks.saver.global.InstallConstants.START_OPERATION_NAME;
+import static com.example.tasks.saver.global.InstallConstants.START_TASK_NAME;
+
 @Entity(name = "Operation")
-@Table(name = "OPERATIONS")
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Builder
@@ -17,39 +20,35 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonRootName(value = "operation")
-public class Operation extends Audit{
+@Table(name = "OPERATIONS")
+public class Operation extends Audit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "OPERATION_ID", nullable = false, unique = true, insertable = false, updatable = false)
+    @Column(name = "OPERATION_ID", nullable = false, unique = true)
     private Long id;
 
-    //@GeneratedValue(strategy = GenerationType.AUTO)
-/*
-    @Column(name = "OPERATION_NUMBER", nullable = false, unique = true, insertable = true, updatable = true)
+    @Column(name = "OPERATION_PRICE", nullable = false)
     @JsonProperty
-    private Long operationNumber;
-*/
+    private BigDecimal operationPrice = BigDecimal.ZERO;
 
-    @Column(name = "OPERATION_PRICE", nullable = false, unique = false, insertable = true, updatable = true)
-    @JsonProperty
-    private BigDecimal operationPrice;
-
-    @Column(name = "OPERATION_NAME", nullable = false, unique = true, insertable = true, updatable = true)
+    @Column(name = "OPERATION_NAME", nullable = false, unique = true)
     @JsonProperty
     private String operationName;
 
 
-    @Column(name = "OPERATION_STATUS", nullable = true, unique = false, insertable = true, updatable = true)
+    @Column(name = "OPERATION_STATUS")
     @JsonProperty
-    private String operationStatus;
+    private String operationStatus = OperationStatus.START.name();
 
 
-    @Column(name = "TASK_NAME", nullable = false, unique = true, insertable = true, updatable = true)
-    @JsonProperty
-    private String taskName;//during creation
 
-    @Column(name = "OPERATION_DESCRIPTION", nullable = true, unique = false, insertable = true, updatable = true)
+    @Column(name = "TASK_NAME", nullable = false)
     @JsonProperty
-    private String operationDescription;
+    private String taskName;
+
+
+    @Column(name = "OPERATION_DESCRIPTION")
+    @JsonProperty
+    private String operationDescription = START_OPERATION_NAME;
 
 }
