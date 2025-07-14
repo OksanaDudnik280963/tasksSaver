@@ -5,10 +5,12 @@ import com.example.tasks.saver.dto.Task;
 import com.example.tasks.saver.dto.enums.OperationStatus;
 import com.example.tasks.saver.dto.enums.RoleName;
 import com.example.tasks.saver.repositories.OperationRepository;
+import com.example.tasks.saver.repositories.TaskRepository;
 import com.example.tasks.saver.services.interfaces.OperationServiceInterface;
 import com.example.tasks.saver.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +21,15 @@ import static com.example.tasks.saver.global.InstallConstants.START_OPERATION_NA
 import static com.example.tasks.saver.global.InstallConstants.START_TASK_NAME;
 
 @Slf4j
-@Service("operationService")
+@Service
 public class OperationService implements OperationServiceInterface {
     private final OperationRepository operationRepository;
+    private final TaskRepository taskRepository;
 
     @Autowired
-    public OperationService(OperationRepository operationRepository) {
+    public OperationService(OperationRepository operationRepository, TaskRepository taskRepository) {
         this.operationRepository = operationRepository;
+        this.taskRepository = taskRepository;
     }
 
     public Operation save(Operation operation) {
@@ -39,7 +43,7 @@ public class OperationService implements OperationServiceInterface {
 
             Optional<Operation> operationOptional = ((operation.getId() != null) ?
                     this.operationRepository.findById(operation.getId()) :
-                    this.operationRepository.findByOperationName(operation.getTaskName()));
+                    this.operationRepository.findByOperationName(operation.getOperationName()));
             if (operationOptional.isPresent()) {
                 log.info("Saving of operation = {}", operationOptional.get());
                 if (operation.equals(operationOptional.get())) {
@@ -48,25 +52,24 @@ public class OperationService implements OperationServiceInterface {
                     log.info("Operation {} already exist", operation.getTaskName());
 
                     Operation realOperation = operationOptional.get();
-
-                    Operation updated = Operation.builder()
+                    Optional<Task> parentTask = taskRepository.findByTaskName(realOperation.getTaskName());
+                    Operation updatedOperation = Operation.builder()
                             .id(realOperation.getId())
-                            .taskName(operation.getTaskName())
+                            .operationName(realOperation.getOperationName())
+                            .taskName(parentTask.isPresent() ? parentTask.get().getTaskName() : operation.getTaskName())
                             .operationDescription(operation.getOperationDescription())
                             .operationStatus(operation.getOperationStatus())
                             .operationPrice(operation.getOperationPrice())
-                            .operationName(operation.getOperationName())
                             .build();
-                    this.operationRepository.save(updated);
-                    return updated;
+                    return this.operationRepository.save(updatedOperation);
                 }
             } else {
-                this.operationRepository.save(operation);
-                return operation;
+                return this.operationRepository.save(operation);
             }
         }
     }
 
+/*
     public Operation save(Task task, Operation operation) {
         if (operation != null) {
             if (log.isDebugEnabled()) {
@@ -77,8 +80,7 @@ public class OperationService implements OperationServiceInterface {
             return null;
         }
         Optional<Operation> operationOptional = this.operationRepository.findById(operation.getId());
-                this.operationRepository.findByTaskNameAndOperationName(
-                task.getTaskName(), operation.getOperationName());
+        this.operationRepository.findByOperationName(operation.getOperationName());
         if (operationOptional.isPresent()) {
             log.info("Saving of operation = {}", operationOptional);
             if (operation.equals(operationOptional.get())) {
@@ -101,6 +103,7 @@ public class OperationService implements OperationServiceInterface {
         }
 
     }
+*/
 
     private boolean existsById(Long id) {
         return this.operationRepository.existsById(id);
@@ -174,8 +177,8 @@ public class OperationService implements OperationServiceInterface {
             operation.setUpdated(new Date());
             operation.setCreatedBy(RoleName.MANAGER.name());
             operation.setChangedBy(RoleName.MANAGER.name());
-            operationOptional = Optional.of(operation);
-            return operationOptional.get();
+            //operationOptional = Optional.of(operation);
+            return operation;
         } else {
             if (log.isDebugEnabled()) {
                 log.info("Filling = {}", JsonUtils.toJson(operationOptional));
@@ -184,16 +187,16 @@ public class OperationService implements OperationServiceInterface {
             Operation operation = Operation.builder()
                     .id((operationOptional.get().getId() != null) ?
                             operationOptional.get().getId() : (count() + 1L))
+                    .operationName(operationOptional.get().getOperationName() == null ?
+                            START_OPERATION_NAME : operationOptional.get().getOperationName())
                     .operationPrice((operationOptional.get().getOperationPrice() == null) ?
                             BigDecimal.ZERO : operationOptional.get().getOperationPrice())
-                    .operationDescription((operationOptional.get().getOperationDescription().isEmpty()) ?
-                            START_OPERATION_NAME : operationOptional.get().getOperationDescription())
-                    .taskName((operationOptional.get().getTaskName().isEmpty()) ?
+                    .operationDescription(operationOptional.get().getOperationDescription() == null ?
+                            operationOptional.get().getOperationName() : operationOptional.get().getOperationDescription())
+                    .taskName((operationOptional.get().getTaskName() == null) ?
                             START_TASK_NAME : operationOptional.get().getTaskName())
                     .operationStatus((operationOptional.get().getOperationStatus() != null) ?
                             operationOptional.get().getOperationStatus() : OperationStatus.START.name())
-                    .operationName(operationOptional.get().getOperationName().isEmpty() ?
-                            START_OPERATION_NAME : operationOptional.get().getOperationName())
                     .build();
             operation.setUpdated(new Date());
             operation.setChangedBy(RoleName.MANAGER.name());

@@ -2,9 +2,11 @@ package com.example.tasks.saver.rest;
 
 import com.example.tasks.saver.dto.Operation;
 import com.example.tasks.saver.repositories.OperationRepository;
+import com.example.tasks.saver.repositories.TaskRepository;
 import com.example.tasks.saver.services.implementations.OperationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -19,20 +21,22 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Slf4j
 @Controller
 @RequestMapping("/rest/api/tasks/operations")
 public class OperationController {
-    private final OperationRepository operationRepository;
-    private final OperationService operationService;
+
+    private OperationService operationService;
 
     @Autowired
-    public OperationController(OperationRepository operationRepository) {
-        this.operationService = new OperationService(operationRepository);
-        this.operationRepository = operationRepository;
+    private OperationService operationService(OperationRepository operationRepository, TaskRepository taskRepository) {
+        this.operationService = new OperationService(operationRepository, taskRepository);
+        return this.operationService;
     }
+
 
     @GetMapping(value = "/list")
     public ModelAndView listAll(@RequestParam("page") Optional<Integer> page,
@@ -53,7 +57,7 @@ public class OperationController {
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
                     .boxed()
-                    .collect(java.util.stream.Collectors.toList());
+                    .collect(Collectors.toList());
             model.addObject("pageNumbers", pageNumbers);
         }
         try {

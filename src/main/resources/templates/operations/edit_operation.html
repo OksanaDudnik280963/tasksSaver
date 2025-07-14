@@ -13,6 +13,16 @@
             <caption> Edit Operation</caption>
             <tr>
                 <td>
+                    <label for="id" th:text="${'OperationId'}" th:field="${operation.id}"></label>
+                </td>
+                <td>
+                    <input id="id" type="text" th:field="${operation.id}" disabled/>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>
                     <label for="name" th:text="${'OperationName'}" th:field="${operation.operationName}"></label>
                 </td>
                 <td>
@@ -24,10 +34,10 @@
 
             <tr>
                 <td>
-                    <label th:text="OperationDescription" th:field="${operation.operationDescription}"></label>
+                    <label th:for="description" th:text="OperationDescription" th:field="${operation.operationDescription}"></label>
                 </td>
                 <td>
-                    <input type="text" th:field="${operation.operationDescription}" disabled="false"/>
+                    <input id="description" type="text" th:field="${operation.operationDescription}" />
                 </td>
                 <td>
                     <p th:if="${#fields.hasErrors('operationDescription')}" th:errorclass="error" th:errors="*{operationDescription}"></p>

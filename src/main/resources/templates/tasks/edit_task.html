@@ -14,11 +14,21 @@
         <table>
             <tr>
                 <td>
-                    <label th:text="${'TaskName'}" th:field="${task.taskName}"></label>
+                    <label for="id" th:text="${'TaskId'}" th:field="${task.id}"></label>
                 </td>
-                <td><label>
-                    <input type="text" th:field="*{taskName}"/>
-                </label>
+                <td>
+                    <input id="id" type="text" th:field="${task.id}" disabled/>
+
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <label for="name" th:text="${'TaskName'}" th:field="${task.taskName}"></label>
+                </td>
+                <td>
+                    <input id="name" type="text" th:field="*{taskName}"/>
+
                 </td>
                 <td>
                     <p th:if="${#fields.hasErrors('taskName')}" th:errorclass="error" th:errors="*{taskName}"></p>
@@ -26,11 +36,11 @@
             </tr>
             <tr>
                 <td>
-                    <label th:text="${'TaskDescription'}" th:field="${task.taskDescription}"></label>
+                    <label for="descr" th:text="${'TaskDescription'}" th:field="${task.taskDescription}"></label>
                 </td>
-                <td><label>
-                    <input type="text" th:field="${task.taskDescription}">
-                </label></td>
+                <td>
+                    <input id="descr" type="text" th:field="${task.taskDescription}">
+                </td>
                 <td>
                     <p th:if="${#fields.hasErrors('taskDescription')}" th:errorclass="error"
                        th:errors="*{taskDescription}"></p>

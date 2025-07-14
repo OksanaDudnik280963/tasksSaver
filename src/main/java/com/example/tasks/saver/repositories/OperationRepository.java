@@ -8,11 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-@Repository("operationRepository")
+@Repository
 public interface OperationRepository extends CrudRepository<Operation, Long> {
-    Optional<Operation> findByTaskNameAndOperationName(String taskName, String operationName);
     List<Operation> findByTaskName(String taskName);
     Iterable<Operation> findAll(Sort sort);
-    ////List<Operation> findByTaskName(String taskName);
     Optional<Operation> findByOperationName(String operationName);
 }

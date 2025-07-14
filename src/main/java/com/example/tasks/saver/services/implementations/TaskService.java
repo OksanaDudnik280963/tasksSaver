@@ -10,6 +10,7 @@ import com.example.tasks.saver.services.interfaces.TaskServiceInterface;
 import com.example.tasks.saver.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +20,8 @@ import java.util.*;
 import static com.example.tasks.saver.global.InstallConstants.START_TASK_NAME;
 
 @Slf4j
-@Service("taskService")
+@Service
 public class TaskService implements TaskServiceInterface {
-
     private final TaskRepository taskRepository;
     private final OperationRepository operationRepository;
 
@@ -51,8 +51,8 @@ public class TaskService implements TaskServiceInterface {
             task.setUpdated(new Date());
             task.setCreatedBy(RoleName.MANAGER.name());
             task.setChangedBy(RoleName.MANAGER.name());
-            taskOptional = Optional.of(task);
-            return taskOptional.get();
+           // taskOptional = Optional.of(task);
+            return task;
         } else {
             Task task = Task.builder()
                     .id((taskOptional.get().getId() != null) ? taskOptional.get().getId()

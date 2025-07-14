@@ -7,6 +7,7 @@ import com.example.tasks.saver.repositories.TaskRepository;
 import com.example.tasks.saver.services.implementations.TaskService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -27,15 +28,11 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/rest/api/tasks")
 public class TaskController {
 
-    private final TaskRepository taskRepository;
-    private final OperationRepository operationRepository;
     private final TaskService taskService;
 
     @Autowired
     public TaskController(OperationRepository operationRepository, TaskRepository taskRepository) {
-        this.operationRepository = operationRepository;
         this.taskService = new TaskService(taskRepository, operationRepository);
-        this.taskRepository = taskRepository;
     }
 
     @GetMapping(value = "/list", produces = APPLICATION_JSON_VALUE)
