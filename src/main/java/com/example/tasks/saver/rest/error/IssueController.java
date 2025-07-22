@@ -15,25 +15,25 @@ import static com.example.tasks.saver.global.InstallConstants.PATH_ERROR;
 @RequestMapping(value = "/rest/api/tasks/errors")
 public class IssueController implements org.springframework.boot.web.servlet.error.ErrorController {
 
-    @GetMapping(value = PATH_ERROR, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/error")
     public void error(HttpServletResponse response) throws IOException {
         int status = response.getStatus();
         switch (status) {
             case 404:
-                response.sendRedirect("/404");
+                response.sendRedirect("/errors/404");
                 break;
             case 401:
-                response.sendRedirect("/401");
+                response.sendRedirect("/errors/401");
                 break;
             case 403:
-                response.sendRedirect("/403");
+                response.sendRedirect("/errors/403");
                 break;
             case 405:
-                response.sendRedirect("/405");
+                response.sendRedirect("/errors/405");
                 break;
 
             default:
-                response.sendRedirect("/error");
+                response.sendRedirect("/errors/error");
         }
     }
     @GetMapping("/404")
@@ -56,9 +56,11 @@ public class IssueController implements org.springframework.boot.web.servlet.err
         return "/errors/405";
     }
 
+/*
     @GetMapping("/error")
     String getErrorPage() {
         return "/errors/error";
     }
+*/
 
 }

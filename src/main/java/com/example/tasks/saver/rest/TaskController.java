@@ -63,6 +63,7 @@ public class TaskController {
         } catch (Exception ex) {
             String exMessage = ex.getMessage();
             ModelAndView modelErr = new ModelAndView(ERR_PAGE);
+            modelErr.addObject("title", ERR_PAGE_TITLE);
             modelErr.addObject(ERR_MSG, exMessage);
             log.error(exMessage);
             return modelErr;
@@ -117,6 +118,7 @@ public class TaskController {
         } catch (Exception ex) {
             String exMessage = ex.getMessage();
             ModelAndView model = new ModelAndView(ERR_PAGE);
+            model.addObject("title", ERR_PAGE_TITLE);
             model.addObject(ERR_MSG, exMessage);
             log.error(exMessage);
             return model;

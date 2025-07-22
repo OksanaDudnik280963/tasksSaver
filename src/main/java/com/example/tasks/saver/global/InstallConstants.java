@@ -12,6 +12,7 @@ public class InstallConstants {
 
     public static final String ERR_MSG = "errMsg";
     public static final String ERR_PAGE = "/errors/error";
+    public static final String ERR_PAGE_TITLE = "Errors page.";
 
     public static final String TASKS_PAGE = "/tasks/tasksList";
     public static final String TASKS_PAGE_URL = "/rest/api/tasks/list";

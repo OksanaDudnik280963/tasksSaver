@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       lang="en">
-<head lang="en" th:include="fragments/header :: header(metaTitle='Edit Task')">
+<head lang="en" th:insert="/fragments/header.html :: header(metaTitle='Edit Task')">
     <title th:id="metaTitle">Edit Task</title>
 </head>
 <body>
@@ -36,10 +36,10 @@
             </tr>
             <tr>
                 <td>
-                    <label for="descr" th:text="${'TaskDescription'}" th:field="${task.taskDescription}"></label>
+                    <label for="description" th:text="${'TaskDescription'}" th:field="${task.taskDescription}"></label>
                 </td>
                 <td>
-                    <input id="descr" type="text" th:field="${task.taskDescription}">
+                    <input id="description" type="text" th:field="${task.taskDescription}">
                 </td>
                 <td>
                     <p th:if="${#fields.hasErrors('taskDescription')}" th:errorclass="error"
@@ -88,7 +88,7 @@
         </table>
 
         <br/><br/>
-        <div th:if="${!taskOperationsList.isEmpty()}">
+        <div th:if="${!taskOperationsList.isEmpty()}" th:style="border: 15px solid green;">
             <a th:href="@{'/rest/api/tasks/list/operations/'+${task.id}}"
                th:text="${taskOperationsList.size()}"
                th:class="active"></a>
@@ -97,6 +97,6 @@
     </form>
 </div>
 <br/><br/>
-<div lang="en" th:replace="fragments/footer.html::footer"></div>
+<div lang="en" th:insert="/fragments/footer.html::footer"></div>
 </body>
 </html>

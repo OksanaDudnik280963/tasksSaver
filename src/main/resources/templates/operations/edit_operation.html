@@ -3,7 +3,7 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
-<head lang="en" th:include="fragments/header :: header(metaTitle='Edit Operation')">
+<head lang="en" th:include="fragments/header.html :: header(metaTitle='Edit Operation')">
     <title th:id="${metaTitle} ? ${metaTitle} : 'Edit Operation'"></title>
 </head>
 <body>
@@ -90,7 +90,7 @@
 </div>
 
 <br/><br/>
-<div lang="en" th:replace="fragments/footer.html::footer"></div>
+<div lang="en" th:insert="fragments/footer.html::footer"></div>
 
 </body>
 </html>

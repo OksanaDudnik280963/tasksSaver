@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       lang="en">
-<head lang="en" th:include="fragments/header :: header(metaTitle='Tasks List')">
+<head lang="en" th:insert="/fragments/header :: header(metaTitle='Tasks List')">
         <title th:id="${metaTitle} ? ${metaTitle} : 'Tasks List'"></title>
 </head>
 
@@ -47,7 +47,11 @@
     <br/><br/>
 
 </div>
+<div th:insert="/fragments/errorMessage.html :: errorMessage(${errMsg})">
+    <p th:text="${errMsg}"></p>
+</div>
+
 <br/><br/>
-<div lang="en" th:replace="fragments/footer.html::footer"></div>
+<div lang="en" th:insert="/fragments/footer.html::footer"></div>
 </body>
 </html>
