@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      lang="ru">
-<head lang="en" th:include="fragments/header :: header(metaTitle='Error page')">
-    <title th:id="metaTitle">Error page</title>
+      lang="en">
+<head lang="en" th:include="fragments/header.html :: header(${title})">
+    <title th:id="metaTitle" th:object="${title}"></title>
 </head>
 
 
 <body class="container">
 
-<div th:include="fragments/errorMessage :: errorMessage(errMsg)">
-    <h1 th:id="errMsg" th:object="${errMsg}"></h1>
-    <!--<a th:id="errMsg" th:title="${errMsg}"></a>-->
+<div th:include="fragments/errorMessage.html :: errorMessage(${errMsg})">
+    <h1 th:id="errMsg" th:text="${errMsg}"></h1>
 </div>
 
 <br/><br/>
-<div lang="en" th:replace="fragments/footer.html::footer()"></div>
+<div lang="en" th:insert="fragments/footer.html::footer"></div>
 
 </body>
 </html>

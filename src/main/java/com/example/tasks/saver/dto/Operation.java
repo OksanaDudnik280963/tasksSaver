@@ -9,7 +9,6 @@ import lombok.*;
 import java.math.BigDecimal;
 
 @Entity(name = "Operation")
-@Table(name = "OPERATIONS")
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Builder
@@ -17,38 +16,34 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonRootName(value = "operation")
-public class Operation extends Audit{
+@Table(name = "OPERATIONS")
+public class Operation extends Audit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "OPERATION_ID", nullable = false, unique = true, insertable = false, updatable = false)
+    @Column(name = "OPERATION_ID", nullable = false, unique = true)
     private Long id;
 
-    //@GeneratedValue(strategy = GenerationType.AUTO)
-/*
-    @Column(name = "OPERATION_NUMBER", nullable = false, unique = true, insertable = true, updatable = true)
-    @JsonProperty
-    private Long operationNumber;
-*/
-
-    @Column(name = "OPERATION_PRICE", nullable = false, unique = false, insertable = true, updatable = true)
+    @Column(name = "OPERATION_PRICE", nullable = false)
     @JsonProperty
     private BigDecimal operationPrice;
 
-    @Column(name = "OPERATION_NAME", nullable = false, unique = true, insertable = true, updatable = true)
+    @Column(name = "OPERATION_NAME", nullable = false, unique = true)
     @JsonProperty
     private String operationName;
 
 
-    @Column(name = "OPERATION_STATUS", nullable = true, unique = false, insertable = true, updatable = true)
+    @Column(name = "OPERATION_STATUS")
     @JsonProperty
     private String operationStatus;
 
 
-    @Column(name = "TASK_NAME", nullable = false, unique = true, insertable = true, updatable = true)
-    @JsonProperty
-    private String taskName;//during creation
 
-    @Column(name = "OPERATION_DESCRIPTION", nullable = true, unique = false, insertable = true, updatable = true)
+    @Column(name = "TASK_NAME", nullable = false)
+    @JsonProperty
+    private String taskName;
+
+
+    @Column(name = "OPERATION_DESCRIPTION")
     @JsonProperty
     private String operationDescription;
 

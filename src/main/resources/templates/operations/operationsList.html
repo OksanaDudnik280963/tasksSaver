@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      lang="ru">
+      lang="en">
 <head lang="en" th:include="fragments/header :: header(metaTitle='Operations List')">
     <title th:id="${metaTitle} ? ${metaTitle} : 'Operations List'"></title>
 </head>
@@ -14,17 +14,22 @@
         <caption>Operations List</caption>
         <thead class="table-header">
         <tr>
-            <th>OperationNumber</th>
-            <th>OperationName</th>
-            <th>OperationDescription</th>
+            <th>Operation Name</th>
+            <th>Task Name</th>
+            <th>Operation Description</th>
+            <th>Operation Price</th>
+            <th>Operation Status</th>
             <th>Actions</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="operation : ${operations}">
-            <td th:text="${operation.getNumber}">OperationNumber</td>
-            <td th:text="${operation.getName}">OperationName</td>
-            <td th:text="${operation.getDescription}">OperationDescription</td>
+
+            <td th:text="${operation.operationName}">Operation Name</td>
+            <td th:text="${operation.taskName}">Operation Task Name</td>
+            <td th:text="${operation.operationDescription}">Operation Description</td>
+            <td th:text="${operation.operationPrice}">Operation Price</td>
+            <td th:text="${operation.operationStatus}">Operation Status</td>
             <td>
                 <a th:href="@{'/rest/api/tasks/operations/edit/'+${operation.id}}">Edit</a>
                 <a th:href="@{'/rest/api/tasks/operations/delete/'+${operation.id}}">Delete</a>
@@ -33,28 +38,16 @@
         </tbody>
     </table>
     <br/><br/>
-    <nav aria-label="Page navigation" class="navbar navbar-expand-lg navbar-light bg-light">
-        <ul class="pagination">
-            <li class="page-item" th:classappend="${currentPage == 0 ? 'disabled' : ''}">
-                <a class="page-link" th:href="@{/rest/api/tasks/operations/?page=0}">First</a>
-            </li>
-            <li class="page-item" th:classappend="${currentPage == 0 ? 'disabled' : ''}">
-                <a class="page-link" th:href="@{/rest/api/tasks/operations/?page=${currentPage - 1}}">Previous</a>
-            </li>
-            <li class="page-item" th:each="i : ${#numbers.sequence(0, operations.totalPages - 1)}"
-                th:classappend="${currentPage == i ? 'active' : ''}">
-                <a class="page-link"> th:href="@{/rest/api/tasks/operations/?page=(${i})}" th:text="${i + 1}"</a>
-            </li>
-            <li class="page-item" th:classappend="${currentPage == operations.totalPages - 1 ? 'disabled' : ''}">
-                <a class="page-link" th:href="@{/rest/api/tasks/operations/?page=${currentPage + 1}}">Next</a>
-            </li>
-            <li class="page-item" th:classappend="${currentPage == operations.totalPages - 1 ? 'disabled' : ''}">
-                <a class="page-link" th:href="@{/rest/api/tasks/operations/?page=${operations.totalPages - 1}}">Last</a>
-            </li>
-        </ul>
-    </nav>
+    <div th:if="${!operations.isEmpty()}" class="pagination"
+         th:each="pageNumber : ${pageNumbers}">
+
+        <a th:href="@{'/rest/api/tasks/operations/list?page='+${pageNumber}+'&size='+${pageSize}}"
+           th:text="${pageNumber}"
+           th:class="(${pageNumber==operationsPage.number + 1} ? 'active':'')"></a>
+    </div>
+
 </div>
 <br/><br/>
-<div lang="en" th:replace="fragments/footer.html::footer"></div>
+<div lang="en" th:insert="fragments/footer.html::footer"></div>
 </body>
 </html>

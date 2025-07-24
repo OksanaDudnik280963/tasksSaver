@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      lang="ru">
-<head lang="en" th:include="fragments/header :: header(metaTitle='Tasks List')">
+      lang="en">
+<head lang="en" th:insert="/fragments/header :: header(metaTitle='Tasks List')">
         <title th:id="${metaTitle} ? ${metaTitle} : 'Tasks List'"></title>
 </head>
 
@@ -14,7 +14,6 @@
         <caption>Tasks List</caption>
         <thead class="table-header">
         <tr>
-            <th>Task Number</th>
             <th>Task Name</th>
             <th>Task Description</th>
             <th>Task Cost</th>
@@ -25,7 +24,6 @@
         </thead>
         <tbody>
         <tr th:each="task : ${tasks}">
-            <td th:text="${task.taskNumber}">Task Number</td>
             <td th:text="${task.taskName}">Task Name</td>
             <td th:text="${task.taskDescription}">Task Description</td>
             <td th:text="${task.taskCost}">Task Cost</td>
@@ -39,39 +37,21 @@
         </tbody>
     </table>
     <br/><br/>
-<!--
-    <nav aria-label="Page navigation"  class="navbar navbar-expand-lg navbar-light bg-light">
-        <ul class="pagination">
-            <li class="page-item" th:classappend="${currentPage == 0 ? 'disabled' : ''}">
-                <a class="page-link" th:href="@{/rest/api/tasks/?page=0}">First</a>
-            </li>
-            <li class="page-item" th:classappend="${currentPage == 0 ? 'disabled' : ''}">
-                <a class="page-link" th:href="@{/rest/api/tasks/?page=${currentPage - 1}}">Previous</a>
-            </li>
-            <li class="page-item" th:each="i : ${#numbers.sequence(0, tasks.totalPages - 1)}"
-                th:classappend="${currentPage == i ? 'active' : ''}">
-                <a class="page-link"> th:href="@{/rest/api/tasks/?page=(${i})}" th:text="${i + 1}"</a>
-            </li>
-            <li class="page-item" th:classappend="${currentPage == tasks.totalPages - 1 ? 'disabled' : ''}">
-                <a class="page-link" th:href="@{/rest/api/users/?page=${currentPage + 1}}">Next</a>
-            </li>
-            <li class="page-item" th:classappend="${currentPage == tasks.totalPages - 1 ? 'disabled' : ''}">
-                <a class="page-link" th:href="@{/rest/api/users/?page=${tasks.totalPages - 1}}">Last</a>
-            </li>
-        </ul>
-    </nav>
--->
-    <div th:if="${tasks.totalPages > 0}" class="pagination"
+    <div th:if="${!tasks.isEmpty()}" class="pagination"
          th:each="pageNumber : ${pageNumbers}">
 
-        <a th:href="@{'/rest/api/tasks/?page='+${pageNumber}+'&size='+${pageSize}}"
+        <a th:href="@{'/rest/api/tasks/list?page='+${pageNumber}+'&size='+${pageSize}}"
            th:text="${pageNumber}"
            th:class="(${pageNumber==tasksPage.number + 1} ? 'active':'')"></a>
     </div>
     <br/><br/>
 
 </div>
+<div th:insert="/fragments/errorMessage.html :: errorMessage(${errMsg})">
+    <p th:text="${errMsg}"></p>
+</div>
+
 <br/><br/>
-<div lang="en" th:replace="fragments/footer.html::footer"></div>
+<div lang="en" th:insert="/fragments/footer.html::footer"></div>
 </body>
 </html>

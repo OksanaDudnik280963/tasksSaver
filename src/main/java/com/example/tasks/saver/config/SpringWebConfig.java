@@ -53,14 +53,7 @@ public class SpringWebConfig implements ApplicationContextAware {
 
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
-        // SpringResourceTemplateResolver automatically integrates with Spring's own
-        // resource resolution infrastructure, which is highly recommended.
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-/*
-        templateResolver.setApplicationContext(this.applicationContext);
-        templateResolver.setPrefix("/WEB-INF/templates/");
-        templateResolver.setSuffix(".html");
-*/
         templateResolver.setApplicationContext(this.applicationContext);
         templateResolver.setPrefix("classpath:/templates/");
         templateResolver.setSuffix(".html");
@@ -94,5 +87,4 @@ public class SpringWebConfig implements ApplicationContextAware {
         viewResolver.setTemplateEngine(templateEngine());
         return viewResolver;
     }
-
 }

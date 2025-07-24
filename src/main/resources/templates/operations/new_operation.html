@@ -8,23 +8,15 @@
 </head>
 <body>
 <div class="container mt-5">
-    <form action="#" th:action="@{'/rest/api/task/operation/save'}" th:object="${operation}" method="post">
+    <form action="#" th:action="@{'/rest/api/tasks/operations/save'}" th:object="${operation}" method="post">
         <table class="align-content-center">
             <caption> New Operation creation</caption>
             <tr>
                 <td>
-                    <label th:text="Operation number" th:field="${operation.number}" ></label>
+                    <label for="name" th:text="${'OperationName'}" th:field="${operation.operationName}"></label>
                 </td>
                 <td>
-                    <input type="text" th:field="${operation.number}" th:disabled="true"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label th:text="${'OperationName'}" th:field="${operation.operationName}"></label>
-                </td>
-                <td>
-                    <input type="text" th:field="${operation.operationName}"></td>
+                    <input id="name" type="text" th:field="${operation.operationName}"></td>
                 <td>
                     <p th:if="${#fields.hasErrors('operationName')}" th:errorclass="error" th:errors="*{operationName}"></p>
                 </td>
@@ -32,10 +24,10 @@
 
             <tr>
                 <td>
-                    <label th:text="Operation description" th:field="${operation.operationDescription}"></label>
+                    <label for="description" th:text="OperationDescription" th:field="${operation.operationDescription}"></label>
                 </td>
                 <td>
-                    <input type="text" th:field="${operation.operationDescription}" th:disabled="false"/>
+                    <input id="description" type="text" th:field="${operation.operationDescription}" th:disabled="false"/>
                 </td>
                 <td>
                     <p th:if="${#fields.hasErrors('operationDescription')}" th:errorclass="error" th:errors="*{operationDescription}"></p>
@@ -43,16 +35,16 @@
             </tr>
             <tr>
                 <td>
-                    <label th:text="Operation Price" th:field="${operation.operationPrice}"></label>
+                    <label for="price" th:text="OperationPrice" th:field="${operation.operationPrice}"></label>
                 </td>
-                <td><input type="text" th:field="${operationPrice}"></td>
+                <td><input id="price" type="number" th:field="${operation.operationPrice}"></td>
                 <td>
                     <p th:if="${#fields.hasErrors('operationPrice')}" th:errorclass="error" th:errors="*{operationPrice}"></p>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label th:text="${'Task Name'}" th:field="${operation.taskName}"></label>
+                    <label th:text="${'TaskName'}" th:field="${operation.taskName}"></label>
                 </td>
                 <td><label>
                     <input type="text" th:field="${operation.taskName}">
@@ -63,11 +55,11 @@
             </tr>
             <tr>
                 <td>
-                    <label th:text="${'Operation Status'}" th:field="${operation.operationStatus }"></label>
+                    <label for="select" th:text="${'Operation Status'}" th:field="${operation.operationStatus }"></label>
                 </td>
                 <td>
-                    <select name="OperationStatus" th:field="${operation.operationStatus}">
-                        <option th:each="status : ${T(com.tasks.calculator.dto.enums.OperationStatus).values()}"
+                    <select id="select" name="OperationStatus" th:field="${operation.operationStatus}">
+                        <option th:each="status : ${T(com.example.tasks.saver.dto.enums.OperationStatus).values()}"
                                 th:value="${status}"
                                 th:text="${status.name}"/>
                     </select>
@@ -86,7 +78,7 @@
 </div>
 
 <br/><br/>
-<div lang="en" th:replace="fragments/footer.html::footer()"></div>
+<div lang="en" th:insert="fragments/footer.html::footer"></div>
 
 </body>
 </html>
