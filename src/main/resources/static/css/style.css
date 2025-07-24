@@ -1,7 +1,7 @@
 body {
     background: darkcyan;
     color: whitesmoke;
-    font-family: arial;
+    font-family: arial, sans-serif;
     font-size: 3vh;
     margin-left: 30px;
     padding-left: 20px;

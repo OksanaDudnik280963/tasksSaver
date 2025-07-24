@@ -23,16 +23,14 @@ import static com.fasterxml.jackson.annotation.JsonFormat.DEFAULT_TIMEZONE;
 public class Audit implements Serializable {
 
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss",
-            locale = JsonFormat.DEFAULT_LOCALE, timezone = DEFAULT_TIMEZONE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "yyyy-MM-dd HH:mm:ss" )
     @Column(name = "CREATED", nullable = false)
     @JsonProperty
     private Date created = new Date();
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss",
-            locale = JsonFormat.DEFAULT_LOCALE, timezone = DEFAULT_TIMEZONE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "yyyy-MM-dd HH:mm:ss" )
     @Column(name = "UPDATED", nullable = false)
     @JsonProperty
