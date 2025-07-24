@@ -15,7 +15,6 @@ import java.util.Date;
 import static com.fasterxml.jackson.annotation.JsonFormat.DEFAULT_TIMEZONE;
 
 
-@SuppressWarnings("serial")
 @MappedSuperclass
 @Getter
 @Setter

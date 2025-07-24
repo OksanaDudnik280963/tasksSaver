@@ -88,7 +88,7 @@
         </table>
 
         <br/><br/>
-        <div th:if="${!taskOperationsList.isEmpty()}" th:style="border: 15px solid green;">
+        <div th:if="${!taskOperationsList.isEmpty()}" >
             <a th:href="@{'/rest/api/tasks/list/operations/'+${task.id}}"
                th:text="${taskOperationsList.size()}"
                th:class="active"></a>

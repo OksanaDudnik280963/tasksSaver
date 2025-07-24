@@ -2,14 +2,11 @@ package com.example.tasks.saver.rest.error;
 
 
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.IOException;
-
-import static com.example.tasks.saver.global.InstallConstants.PATH_ERROR;
 
 @Controller
 @RequestMapping(value = "/rest/api/tasks/errors")

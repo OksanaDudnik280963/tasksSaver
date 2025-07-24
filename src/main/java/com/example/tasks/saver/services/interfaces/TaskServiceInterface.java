@@ -4,7 +4,6 @@ import com.example.tasks.saver.dto.Operation;
 import com.example.tasks.saver.dto.Task;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 
 import java.util.List;
 import java.util.Optional;

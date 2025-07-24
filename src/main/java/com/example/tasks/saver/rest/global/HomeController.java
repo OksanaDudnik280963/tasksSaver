@@ -6,9 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.*;
-
-import static com.example.tasks.saver.dto.enums.ItemNames.*;
 import static com.example.tasks.saver.global.InstallConstants.HOME_PAGE;
 
 @Controller

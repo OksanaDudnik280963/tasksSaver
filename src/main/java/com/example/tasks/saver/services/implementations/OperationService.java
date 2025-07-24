@@ -10,7 +10,6 @@ import com.example.tasks.saver.services.interfaces.OperationServiceInterface;
 import com.example.tasks.saver.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 

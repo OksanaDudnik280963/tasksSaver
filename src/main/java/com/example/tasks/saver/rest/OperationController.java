@@ -4,25 +4,22 @@ import com.example.tasks.saver.dto.Operation;
 import com.example.tasks.saver.repositories.OperationRepository;
 import com.example.tasks.saver.repositories.TaskRepository;
 import com.example.tasks.saver.services.implementations.OperationService;
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import static com.example.tasks.saver.global.InstallConstants.*;
-import static com.example.tasks.saver.utils.JsonUtils.toJson;
-
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static com.example.tasks.saver.global.InstallConstants.*;
+import static com.example.tasks.saver.utils.JsonUtils.toJson;
 
 @Slf4j
 @Controller
