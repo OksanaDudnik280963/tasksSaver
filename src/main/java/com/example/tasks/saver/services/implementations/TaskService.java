@@ -98,14 +98,20 @@ public class TaskService implements TaskServiceInterface {
                     log.info("Task {} already exist", task.getTaskName());
 
                     Task realTask = taskOptional.get();
+                    List<Operation> operations = findOperationsByTaskName(task.getTaskName());
+                    task.setOperationsCount((long) operations.size());
+                    BigDecimal price = BigDecimal.ZERO;
+                    for (Operation value : operations) {
+                        price = price.add(value.getOperationPrice());
+                    }
 
                     Task updated = Task.builder()
                             .id(realTask.getId())
                             .taskName(task.getTaskName())
                             .taskDescription(task.getTaskDescription())
                             .taskStatus(task.getTaskStatus())
-                            .taskCost(task.getTaskCost())
-                            .operationsCount(task.getOperationsCount())
+                            .taskCost(price)
+                            .operationsCount((long)operations.size())
                             .build();
                     this.taskRepository.save(updated);
                     return updated;
@@ -141,6 +147,16 @@ public class TaskService implements TaskServiceInterface {
             Optional<Task> task = this.taskRepository.findById(id);
             task.ifPresent(this.taskRepository::delete);
         }
+    }
+
+    @Override
+    public Long countOperationsByTaskName(String taskName) {
+        return (long) operationRepository.findByTaskName(taskName).size();
+    }
+
+    @Override
+    public List<Operation> findOperationsByTaskName(String taskName) {
+        return operationRepository.findByTaskName(taskName);
     }
 
     @Override

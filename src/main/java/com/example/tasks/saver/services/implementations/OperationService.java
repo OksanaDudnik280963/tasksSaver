@@ -24,11 +24,13 @@ import static com.example.tasks.saver.global.InstallConstants.START_TASK_NAME;
 public class OperationService implements OperationServiceInterface {
     private final OperationRepository operationRepository;
     private final TaskRepository taskRepository;
+    private final TaskService taskService;
 
     @Autowired
-    public OperationService(OperationRepository operationRepository, TaskRepository taskRepository) {
+    public OperationService(OperationRepository operationRepository, TaskRepository taskRepository, TaskService taskService) {
         this.operationRepository = operationRepository;
         this.taskRepository = taskRepository;
+        this.taskService = taskService;
     }
 
     public Operation save(Operation operation) {
@@ -60,12 +62,14 @@ public class OperationService implements OperationServiceInterface {
                             .operationStatus(operation.getOperationStatus())
                             .operationPrice(operation.getOperationPrice())
                             .build();
-                    return this.operationRepository.save(updatedOperation);
+                    Optional<Task> taskOptional = taskRepository.findByTaskName(updatedOperation.getTaskName());
+                    Operation op = this.operationRepository.save(updatedOperation);
+                    taskOptional.ifPresent(taskService::save);
+                    return op;
                 }
-            } else {
-                return this.operationRepository.save(operation);
             }
         }
+        return this.operationRepository.save(operation);
     }
 
 /*

@@ -4,6 +4,7 @@ import com.example.tasks.saver.dto.Operation;
 import com.example.tasks.saver.repositories.OperationRepository;
 import com.example.tasks.saver.repositories.TaskRepository;
 import com.example.tasks.saver.services.implementations.OperationService;
+import com.example.tasks.saver.services.implementations.TaskService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,7 +31,8 @@ public class OperationController {
 
     @Autowired
     private OperationService operationService(OperationRepository operationRepository, TaskRepository taskRepository) {
-        this.operationService = new OperationService(operationRepository, taskRepository);
+        TaskService taskService = new TaskService(taskRepository, operationRepository);
+        this.operationService = new OperationService(operationRepository, taskRepository, taskService);
         return this.operationService;
     }
 
