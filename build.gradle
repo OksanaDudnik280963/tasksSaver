@@ -46,11 +46,11 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     //gson
-    implementation("com.google.code.gson:gson:2.13.1")
+    implementation'com.google.code.gson:gson:2.13.1'
     implementation 'org.slf4j:slf4j-api:2.0.7'
 
-    implementation 'org.webjars:bootstrap:5.3.3'
-    implementation 'org.webjars:jquery:3.6.0'
+    implementation 'org.webjars:bootstrap:5.3.7'
+    implementation 'org.webjars:jquery:3.7.1'
 
     runtimeOnly 'com.mysql:mysql-connector-j'
 

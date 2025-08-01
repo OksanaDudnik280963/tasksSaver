@@ -5,7 +5,7 @@ public class InstallConstants {
     }
     public static final String DATABASE_NAME = "tasks";
     public static final String DB_URL = "jdbc:mysql://localhost:3306/" + DATABASE_NAME + "/?createDatabaseIfNotExist=true";
-
+    public static final String JDBC_DRIVER="com.mysql.cj.jdbc.Driver";
     public static final String ERR_MSG = "errMsg";
     public static final String ERR_PAGE = "/errors/error";
     public static final String ERR_PAGE_TITLE = "Errors page.";

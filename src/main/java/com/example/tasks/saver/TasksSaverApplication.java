@@ -1,5 +1,6 @@
 package com.example.tasks.saver;
 
+import com.example.tasks.saver.utils.DatabaseUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -12,6 +13,8 @@ public class TasksSaverApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TasksSaverApplication.class, args);
+		DatabaseUtils.createDatabase();
+
 	}
 
 }
