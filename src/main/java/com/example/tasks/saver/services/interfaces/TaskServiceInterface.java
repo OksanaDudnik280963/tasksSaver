@@ -16,6 +16,8 @@ public interface TaskServiceInterface {
     Optional<Task> get(Long id) throws Exception;
     List<Operation> getOperationsByTaskId(Long id);
     void delete(long id);
+    Long countOperationsByTaskName(String taskName);
+    List<Operation> findOperationsByTaskName(String taskName);
 /*
     List<Task> findAll(Sort sort);
     Page<Task> findAll(Pageable pageable);

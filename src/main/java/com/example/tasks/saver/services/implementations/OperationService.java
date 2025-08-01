@@ -24,11 +24,13 @@ import static com.example.tasks.saver.global.InstallConstants.START_TASK_NAME;
 public class OperationService implements OperationServiceInterface {
     private final OperationRepository operationRepository;
     private final TaskRepository taskRepository;
+    private final TaskService taskService;
 
     @Autowired
-    public OperationService(OperationRepository operationRepository, TaskRepository taskRepository) {
+    public OperationService(OperationRepository operationRepository, TaskRepository taskRepository, TaskService taskService) {
         this.operationRepository = operationRepository;
         this.taskRepository = taskRepository;
+        this.taskService = taskService;
     }
 
     public Operation save(Operation operation) {
@@ -60,49 +62,17 @@ public class OperationService implements OperationServiceInterface {
                             .operationStatus(operation.getOperationStatus())
                             .operationPrice(operation.getOperationPrice())
                             .build();
-                    return this.operationRepository.save(updatedOperation);
+                    Optional<Task> taskOptional = taskRepository.findByTaskName(updatedOperation.getTaskName());
+                    Operation op = this.operationRepository.save(updatedOperation);
+                    taskOptional.ifPresent(taskService::save);
+                    return op;
                 }
-            } else {
-                return this.operationRepository.save(operation);
             }
         }
+        return this.operationRepository.save(operation);
     }
 
-/*
-    public Operation save(Task task, Operation operation) {
-        if (operation != null) {
-            if (log.isDebugEnabled()) {
-                log.info(JsonUtils.toJson(operation));
-            }
-        } else {
-            log.error("Operation not filled.");
-            return null;
-        }
-        Optional<Operation> operationOptional = this.operationRepository.findById(operation.getId());
-        this.operationRepository.findByOperationName(operation.getOperationName());
-        if (operationOptional.isPresent()) {
-            log.info("Saving of operation = {}", operationOptional);
-            if (operation.equals(operationOptional.get())) {
-                return operationOptional.get();
-            } else {
-                log.info("Operation {} already exist ", operation.getOperationName());
 
-                Operation realOperation = operationOptional.get();
-                Operation updated = Operation.builder()
-                        .id(realOperation.getId())
-                        .taskName(realOperation.getTaskName())
-                        .operationDescription(realOperation.getOperationDescription())
-                        .operationStatus(operation.getOperationStatus())
-                        .operationPrice(realOperation.getOperationPrice())
-                        .build();
-                return this.operationRepository.save(updated);
-            }
-        } else {
-            return this.operationRepository.save(operation);
-        }
-
-    }
-*/
 
     private boolean existsById(Long id) {
         return this.operationRepository.existsById(id);
