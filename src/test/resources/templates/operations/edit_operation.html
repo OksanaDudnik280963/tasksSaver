@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en" th:include="fragments/header.html :: header(metaTitle='Edit Operation')">
+    <title th:id="${metaTitle} ? ${metaTitle} : 'Edit Operation'"></title>
+</head>
+<body>
+<div class="container mt-5">
+    <form action="#" th:action="@{'/rest/api/tasks/operations/save'}" th:object="${operation}" method="post">
+        <table class="align-content-center">
+            <caption> Edit Operation</caption>
+            <tr>
+                <td>
+                    <label for="id" th:text="${'OperationId'}" th:field="${operation.id}"></label>
+                </td>
+                <td>
+                    <input id="id" type="text" th:field="${operation.id}" disabled/>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="name" th:text="${'OperationName'}" th:field="${operation.operationName}"></label>
+                </td>
+                <td>
+                    <input id="name" type="text" th:field="${operation.operationName}"></td>
+                <td>
+                    <p th:if="${#fields.hasErrors('operationName')}" th:errorclass="error" th:errors="*{operationName}"></p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label th:for="description" th:text="OperationDescription" th:field="${operation.operationDescription}"></label>
+                </td>
+                <td>
+                    <input id="description" type="text" th:field="${operation.operationDescription}" />
+                </td>
+                <td>
+                    <p th:if="${#fields.hasErrors('operationDescription')}" th:errorclass="error" th:errors="*{operationDescription}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="price" th:text="OperationPrice" th:field="${operation.operationPrice}"></label>
+                </td>
+                <td><input id="price" type="number" th:field="${operation.operationPrice}"></td>
+                <td>
+                    <p th:if="${#fields.hasErrors('operationPrice')}" th:errorclass="error" th:errors="*{operationPrice}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label th:text="TaskName" th:field="${operation.taskName}"></label>
+                </td>
+                <td><label>
+                    <input type="text" th:field="${operation.taskName}">
+                </label></td>
+                <td>
+                    <p th:if="${#fields.hasErrors('taskName')}" th:errorclass="error" th:errors="*{taskName}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="OperationStatus" th:text="OperationStatus" th:field="${operation.operationStatus }"></label>
+                </td>
+                <td>
+                    <select id="OperationStatus" name="OperationStatus" th:field="${operation.operationStatus}">
+                        <option th:each="status : ${T(com.example.tasks.saver.dto.enums.OperationStatus).values()}"
+                                th:value="${status}"
+                                th:text="${status.name}"/>
+                    </select>
+                </td>
+                <td>
+                    <p th:if="${#fields.hasErrors('operationStatus')}" th:errorclass="error" th:errors="*{operationStatus}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <button type="submit" name="action">Save</button>
+                </td>
+            </tr>
+        </table>
+        <br/>
+
+    </form>
+</div>
+
+<br/><br/>
+<div lang="en" th:insert="fragments/footer.html::footer"></div>
+
+</body>
+</html>

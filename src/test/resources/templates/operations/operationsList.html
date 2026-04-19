@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head lang="en" th:include="fragments/header :: header(metaTitle='Operations List')">
+    <title th:id="${metaTitle} ? ${metaTitle} : 'Operations List'"></title>
+</head>
+
+<body>
+<div class="container mt-5">
+    <a href="/rest/api/tasks/operations/new">Create New Operation</a>
+    <br/><br/>
+    <table class="table table-striped">
+        <caption>Operations List</caption>
+        <thead class="table-header">
+        <tr>
+            <th>Operation Name</th>
+            <th>Task Name</th>
+            <th>Operation Description</th>
+            <th>Operation Price</th>
+            <th>Operation Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="operation : ${operations}">
+
+            <td th:text="${operation.operationName}">Operation Name</td>
+            <td th:text="${operation.taskName}">Operation Task Name</td>
+            <td th:text="${operation.operationDescription}">Operation Description</td>
+            <td th:text="${operation.operationPrice}">Operation Price</td>
+            <td th:text="${operation.operationStatus}">Operation Status</td>
+            <td>
+                <a th:href="@{'/rest/api/tasks/operations/edit/'+${operation.id}}">Edit</a>
+                <a th:href="@{'/rest/api/tasks/operations/delete/'+${operation.id}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br/><br/>
+    <div th:if="${!operations.isEmpty()}" class="pagination"
+         th:each="pageNumber : ${pageNumbers}">
+
+        <a th:href="@{'/rest/api/tasks/operations/list?page='+${pageNumber}+'&size='+${pageSize}}"
+           th:text="${pageNumber}"
+           th:class="(${pageNumber==operationsPage.number + 1} ? 'active':'')"></a>
+    </div>
+
+</div>
+<br/><br/>
+<div lang="en" th:insert="fragments/footer.html::footer"></div>
+</body>
+</html>

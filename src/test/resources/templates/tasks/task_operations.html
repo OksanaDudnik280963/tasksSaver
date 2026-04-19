@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:insert="fragments/header :: header(metaTitle='Task Operations')">
+    <!--/*@thymesVar id="metaTitle" type=""*/-->
+    <title th:text="${metaTitle}"></title>
+</head>
+
+<body class="container">
+
+<section th:fragment="content">
+    <div id="page">
+        <div>Task Operations</div>
+        <form th:action="@{'/rest/api/tasks/list/operations/'+${taskId}}"
+              th:object="${operationsForTask}" method="get">
+            <br/><br/>
+            <table class="table table-striped">
+                <caption>Filtered Operations List</caption>
+                <thead class="table-header">
+                <tr>
+                    <th>Task Id</th>
+                    <th>Task Name</th>
+                    <th>Operation Name</th>
+                    <th>Operation Description</th>
+                    <th>Operation Price</th>
+                    <th>Operation Status</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="operation : ${operationsForTask}">
+                    <td th:text="${taskId}">Task ID</td>
+                    <td th:text="${operation.taskName}">Task Name</td>
+                    <td th:text="${operation.operationName}">Operation Name</td>
+                    <td th:text="${operation.operationDescription}">Operation Description</td>
+                    <td th:text="${operation.operationPrice}">Operation Price</td>
+                    <td th:text="${operation.operationStatus}">Operation Status</td>
+                    <td>
+                        <a th:href="@{'/rest/api/tasks/operations/edit/'+${operation.id}}">Edit</a>
+                        <a th:href="@{'/rest/api/tasks/operations/delete/'+${operation.id}}">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <br/><br/>
+
+        </form>
+    </div>
+</section>
+<div lang="en" th:insert="fragments/footer :: footer"></div>
+</body>
+</html>

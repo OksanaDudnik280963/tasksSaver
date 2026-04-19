@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head lang="en" th:insert="/fragments/header.html :: header(metaTitle='Edit Task')">
+    <title th:id="metaTitle">Edit Task</title>
+</head>
+<body>
+<div>
+    <h1>Edit Task</h1>
+    <br/>
+    <form action="#" th:action="@{/rest/api/tasks/save}" th:object="${task}" method="post">
+
+        <table>
+            <tr>
+                <td>
+                    <label for="id" th:text="${'TaskId'}" th:field="${task.id}"></label>
+                </td>
+                <td>
+                    <input id="id" type="text" th:field="${task.id}" disabled/>
+
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <label for="name" th:text="${'TaskName'}" th:field="${task.taskName}"></label>
+                </td>
+                <td>
+                    <input id="name" type="text" th:field="*{taskName}"/>
+
+                </td>
+                <td>
+                    <p th:if="${#fields.hasErrors('taskName')}" th:errorclass="error" th:errors="*{taskName}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="description" th:text="${'TaskDescription'}" th:field="${task.taskDescription}"></label>
+                </td>
+                <td>
+                    <input id="description" type="text" th:field="${task.taskDescription}">
+                </td>
+                <td>
+                    <p th:if="${#fields.hasErrors('taskDescription')}" th:errorclass="error"
+                       th:errors="*{taskDescription}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="cost" th:text="${'TaskCost'}" th:field="${task.taskCost}"></label>
+                </td>
+                <td><input id="cost" type="text" th:field="${task.taskCost}"></td>
+                <td>
+                    <p th:if="${#fields.hasErrors('taskCost')}" th:errorclass="error" th:errors="*{taskCost}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="count" th:text="${'OperationsCount'}" th:field="${task.operationsCount}"></label>
+                </td>
+                <td><input id="count" type="number" th:field="${task.operationsCount}"></td>
+                <td>
+                    <p th:if="${#fields.hasErrors('operationsCount')}" th:errorclass="error"
+                       th:errors="*{operationsCount}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="status" th:text="${'TaskStatus'}" th:field="${task.taskStatus}"></label>
+                </td>
+                <td>
+                    <select id="status" name="TaskStatus" th:field="${task.taskStatus}">
+                        <option th:each="taskStatus : ${T(com.example.tasks.saver.dto.enums.TasksStatus).values()}"
+                                th:value="${taskStatus}"
+                                th:text="${taskStatus.name}"/>
+                    </select>
+                </td>
+                <td>
+                    <p th:if="${#fields.hasErrors('taskStatus')}" th:errorclass="error" th:errors="*{taskStatus}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <button type="submit" name="action">Save</button>
+                </td>
+            </tr>
+        </table>
+
+        <br/><br/>
+        <div th:if="${!taskOperationsList.isEmpty()}" >
+            <a th:href="@{'/rest/api/tasks/list/operations/'+${task.id}}"
+               th:text="${taskOperationsList.size()}"
+               th:class="active"></a>
+        </div>
+        <br/><br/>
+    </form>
+</div>
+<br/><br/>
+<div lang="en" th:insert="/fragments/footer.html::footer"></div>
+</body>
+</html>
