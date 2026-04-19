@@ -14,7 +14,7 @@ public class DatabaseUtils {
     private DatabaseUtils() {
     }
 
-    public static boolean createDatabase() {
+    public static void createDatabase() {
         //STEP 1: Register JDBC driver
         try {
             Class.forName(JDBC_DRIVER);
@@ -43,6 +43,5 @@ public class DatabaseUtils {
         } catch (Exception e) {
             log.error("Database exist already!");
         }
-        return false;
     }
 }
